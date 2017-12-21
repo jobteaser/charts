@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  redis:
+  - apiVersion: v1
+    created: 2017-12-21T17:11:58.723568085+01:00
+    description: A Redis Cluster with Sentinel StatefulSet
+    digest: aeab5b974c5d030308ba720eae58f8003e1d341dc31de3f8435450a3f2e25d16
+    name: redis
+    urls:
+    - https://jobteaser.github.com/charts/redis-0.1.0.tgz
+    version: 0.1.0
+generated: 2017-12-21T17:11:58.723064517+01:00
