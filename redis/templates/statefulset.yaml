@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "redis.fullname" . }}
+  labels:
+    app: {{ template "redis.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  serviceName: {{ template "redis.fullname" . }}
+  replicas: {{ .Values.redis.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "redis.name" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+    spec:
+      containers:
+      - name: redis
+        image: "redis:3.2"
+        command:
+         - /bin/sh
+         - -c
+         - |
+           if [ ${HOSTNAME##*-} -eq 0 ]; then
+             redis-server /etc/config/master.redis.conf
+           else
+             redis-server /etc/config/slave.redis.conf
+           fi
+        ports:
+        - containerPort: {{ .Values.redis.port }}
+          name: db
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: redis-config
+          mountPath: /etc/config
+      - name: sentinel
+        image: "redis:3.2"
+        command:
+          - /bin/sh
+          - -c
+          - |
+            if [ ${HOSTNAME##*-} -eq 0 ]; then
+              redis-server /etc/config/master.sentinel.conf --sentinel
+            else
+              redis-server /etc/config/slave.sentinel.conf --sentinel
+            fi
+        ports:
+        - containerPort: {{ .Values.sentinel.port }}
+          name: sentinel
+        volumeMounts:
+        - name: redis-config
+          mountPath: /etc/config
+      volumes:
+        - name: redis-config
+          configMap:
+            name: {{ template "redis.fullname" . }}
+  volumeClaimTemplates:
+  - metadata:
+     name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: {{ .Values.redis.diskSize }}

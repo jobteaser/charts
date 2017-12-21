@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Redis Cluster with Sentinel StatefulSet
+name: redis
+version: 0.1.0
