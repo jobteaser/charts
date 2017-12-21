@@ -1,0 +1,7 @@
+redis:
+  port: 6379
+  replicaCount: 3
+  diskSize: 8Gi
+sentinel:
+  quorum: 2
+  port: 16380
