@@ -1,0 +1,7 @@
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $max := (int .Values.redis.replicaCount) }}
+Master: {{ template "redis.fullname" . }}-0.{{ template "redis.fullname" . }}
+Slaves:
+{{ range $index,$_ := untilStep 1 $max 1 -}}
+- {{ template "redis.fullname" $ }}-{{ . }}.{{ template "redis.fullname" $ }}
+{{ end }}
