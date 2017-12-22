@@ -20,8 +20,10 @@ spec:
         heritage: {{ .Release.Service }}
     spec:
       containers:
+
+      #BEGIN redis
       - name: redis
-        image: "redis:3.2"
+        image: "{{ .Values.image }}"
         command:
          - /bin/sh
          - -c
@@ -39,8 +41,12 @@ spec:
           mountPath: /data
         - name: redis-config
           mountPath: /etc/config
+      #END redis
+
+      #BEGIN sentinel
+      # The sentinel monitors redis master
       - name: sentinel
-        image: "redis:3.2"
+        image: "{{ .Values.image }}"
         command:
           - /bin/sh
           - -c
@@ -60,6 +66,8 @@ spec:
         - name: redis-config
           configMap:
             name: {{ template "redis.fullname" . }}
+      #END sentinel
+
   volumeClaimTemplates:
   - metadata:
      name: data
