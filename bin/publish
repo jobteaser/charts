@@ -1,1 +1,11 @@
 #!/usr/bin/env bash
+
+CHART=$1
+
+if [ -d $CHART ];then
+    helm package $CHART -d docs
+    helm repo index docs --url https://jobteaser.github.com/charts
+    git add docs/
+    git commit -m "Publish chart $CHART"
+    #git push
+fi
