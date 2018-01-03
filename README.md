@@ -17,6 +17,6 @@ bin/publish
 ### Install repo into helm
 
 ```
-helm repo add jobteaser https://jobteaser.github.com/charts
+helm repo add jobteaser https://jobteaser.github.io/charts
 ```
 
