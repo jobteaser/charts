@@ -1,0 +1,1 @@
+MySQL url: mysql2://<username>:<password>@{{ template "mysql.fullname" . }}:{{ .Values.service.externalPort }}/{{ .Values.database }}

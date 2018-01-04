@@ -1,0 +1,90 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "mysql.fullname" . }}
+  labels:
+    app: {{ template "mysql.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  serviceName: {{ template "mysql.name" . }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "mysql.name" . }}
+        release: {{ .Release.Name }}
+        tier: backend
+        component: db
+    spec:
+      {{- if .Values.initData.enable }}
+      initContainers:
+      - name: init-data
+        image: {{ .Values.initData.image }}
+        env:
+        - name: OS_PROVIDER
+          value: {{ .Values.initData.objectStorage.provider | quote }}
+        - name: OS_BUCKET
+          value: {{ .Values.initData.objectStorage.bucket | quote }}
+        - name: OS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.initData.objectStorage.secretKeyRefName }}
+              key: access-key-id
+        - name: OS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.initData.objectStorage.secretKeyRefName }}
+              key: secret-access-key
+        - name: OS_HOST
+          value: {{ .Values.initData.objectStorage.host | quote }}
+        command:
+        {{- include "mysql.initData" . | indent 10 }}
+        volumeMounts:
+        - name: data
+          mountPath: /data
+          subPath: mysql
+      {{- end }}
+      containers:
+      - name: mysql
+        image: {{ .Values.image }}
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRefName }}
+              key: root_password
+        - name: MYSQL_DATABASE
+          value: {{ .Values.database }}
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRefName }}
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRefName }}
+              key: password
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        app: {{ template "mysql.name" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+    spec:
+      storageClassName: {{ .Values.persistence.storageClassName | quote }}
+      accessModes:
+      - {{ .Values.persistence.accessMode | quote }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size }}
