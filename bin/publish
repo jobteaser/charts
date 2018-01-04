@@ -7,5 +7,5 @@ if [ -d $CHART ];then
     helm repo index docs --url https://jobteaser.github.com/charts
     git add docs/
     git commit -m "Publish chart $CHART"
-    #git push
+    git push origin master
 fi
