@@ -1,0 +1,1 @@
+ ES url: http://{{ template "elasticsearch.fullname" . }}:{{ .Values.service.externalPort }}
