@@ -6,7 +6,7 @@ replicaCount: 1
 image: elasticsearch:2.3
 
 initData:
-  enable: false
+  enabled: false
   image: minio/mc:latest
   # datafile: my.data.file.path
   # sourceDirectory: mydirectory
@@ -30,9 +30,6 @@ persistence:
   storageClassName: default
   accessMode: ReadWriteOnce
   # size: 8Gi
-
-ingress:
-  enable: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
