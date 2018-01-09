@@ -2,6 +2,11 @@
 
 CHART=$1
 
+if [ -z "$CHART" ]; then
+  printf "Error :: missing chart name"
+  exit 1
+fi
+
 if [ -d $CHART ];then
     helm package $CHART -d docs
     helm repo index docs --url https://jobteaser.github.com/charts
