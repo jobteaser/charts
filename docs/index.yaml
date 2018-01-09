@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   elasticsearch:
   - apiVersion: v1
-    created: 2018-01-04T17:26:05.293377083+01:00
+    created: 2018-01-09T14:04:24.980080714+01:00
     description: A Helm chart for Elasticsearch
     digest: 2fa7fb1be32e88b5a1e3dde07efb86a6d9ad7b7c7eaa5bdb7c705d1bdec008db
     name: elasticsearch
@@ -11,16 +11,16 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v1
-    created: 2018-01-04T17:26:05.293556708+01:00
+    created: 2018-01-09T14:04:24.980281146+01:00
     description: A Helm chart for MySQL
-    digest: ecd2b833e5a1b88f2256c545713d48854afd345e26d9cf14dff028a5113f66e0
+    digest: e6557eb05e5c351181887a8e5683f0a706df2c893ddf3229f5619493db698556
     name: mysql
     urls:
     - https://jobteaser.github.com/charts/mysql-0.1.0.tgz
     version: 0.1.0
   redis:
   - apiVersion: v1
-    created: 2018-01-04T17:26:05.293881835+01:00
+    created: 2018-01-09T14:04:24.98086238+01:00
     description: A Redis Cluster with Sentinel StatefulSet
     digest: 511ce6a5c2f3f92561356cad2398c8e6c6b520586c9610a909a48ccea6b3240a
     name: redis
@@ -28,11 +28,11 @@ entries:
     - https://jobteaser.github.com/charts/redis-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2018-01-04T17:26:05.293720415+01:00
+    created: 2018-01-09T14:04:24.980444303+01:00
     description: A Redis Cluster with Sentinel StatefulSet
     digest: aeab5b974c5d030308ba720eae58f8003e1d341dc31de3f8435450a3f2e25d16
     name: redis
     urls:
     - https://jobteaser.github.com/charts/redis-0.1.0.tgz
     version: 0.1.0
-generated: 2018-01-04T17:26:05.293104648+01:00
+generated: 2018-01-09T14:04:24.979599999+01:00
