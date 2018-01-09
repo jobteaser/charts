@@ -55,6 +55,8 @@ spec:
         - name: data
           mountPath: /var/lib/mysql
           subPath: mysql
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
