@@ -10,7 +10,7 @@ secretKeyRefName: mysql
 image: mysql:5.6
 
 initData:
-  enable: true
+  enabled: true
   image: minio/mc:latest
   # datafile: my.data.file.path
   objectStorage: {}
@@ -32,9 +32,6 @@ persistence:
   storageClassName: default
   accessMode: ReadWriteOnce
   # size: 8Gi
-
-ingress:
-  enable: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
