@@ -1,5 +1,4 @@
 ---
-replicaCount: 1
 image: "postgres:9.6"
 
 ## Specify postgres username/password
@@ -23,8 +22,8 @@ secret:
   ## Use secret store to set postgres user password
   ## ref: https://kubernetes.io/docs/concepts/configuration/secret/
   ##
-  # name:
-  # key:
+  # secretName:
+  # postgresPassword:
 
 
 ## Persist data to a persitent volume

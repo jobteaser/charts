@@ -3,16 +3,16 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: {{ template "postgresql.fullname" . }}
+  name: {{ template "postgres.fullname" . }}
   labels:
-    app: {{ template "postgresql.fullname" . }}
+    app: {{ template "postgres.fullname" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   podSelector:
     matchLabels:
-      app: {{ template "postgresql.fullname" . }}
+      app: {{ template "postgres.fullname" . }}
   ingress:
     # Allow inbound connections
     - ports:
@@ -23,7 +23,7 @@ spec:
       from:
       - podSelector:
           matchLabels:
-            {{ template "postgresql.fullname" . }}-client: "true"
+            {{ template "postgres.fullname" . }}-client: "true"
     {{- end }}
 {{- end }}
 
