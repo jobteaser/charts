@@ -32,8 +32,8 @@ The following tables lists the configurable parameters of the PostgresSQL chart 
 | Parameter                  | Description                                     | Default                                                    |
 | -----------------------    | ---------------------------------------------   | ---------------------------------------------------------- |
 | `secret.enabled`           | Use secret to set postgres password             | `false`                                                    |
-| `secret.name`              | Secret store name                               | `nil`                                                      |
-| `secret.key`               | Secret store key for postgres password          | `nil`                                                      |
+| `secret.secretName`        | Secret store name                               | `nil`                                                      |
+| `secret.postgresPassword`  | Secret store key for postgres password          | `nil`                                                      |
 | `persistence.enabled`      | Use a PVC to persist data                       | `false`                                                    |
 | `persistence.storageClass` | Storage class of backing PVC                    | `nil` (uses alpha storage class annotation)                |
 | `persistence.accessMode`   | Use volume as ReadOnly or ReadWriteOnce         | `ReadWriteOnce`                                            |
