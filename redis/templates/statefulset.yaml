@@ -71,6 +71,11 @@ spec:
             else
               redis-server /etc/config/slave.sentinel.conf --sentinel
             fi
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         ports:
         - containerPort: {{ .Values.sentinel.port }}
           name: sentinel
@@ -79,6 +84,7 @@ spec:
           mountPath: /etc/config
       {{- end }}
       #END sentinel
+
       volumes:
         - name: redis-config
           configMap:
