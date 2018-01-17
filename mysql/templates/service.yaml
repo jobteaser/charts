@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: {{ template "mysql.fullname" . }}
   labels:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "mysql.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -11,8 +12,6 @@ spec:
   selector:
     app: {{ template "mysql.name" . }}
     release: {{ .Release.Name }}
-    tier: backend
-    component: db
   ports:
   - protocol: {{ .Values.service.protocol }}
     name: {{ .Values.service.name }}

@@ -4,7 +4,7 @@ metadata:
   name: {{ template "mysql.fullname" . }}
   labels:
     app: {{ template "mysql.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -14,9 +14,12 @@ spec:
     metadata:
       labels:
         app: {{ template "mysql.name" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
         release: {{ .Release.Name }}
-        tier: backend
-        component: db
+        heritage: {{ .Release.Service }}
+        {{- if .Values.template.labels }}
+{{ toYaml .Values.template.labels | indent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.initData.enabled }}
       initContainers:
