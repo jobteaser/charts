@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   elasticsearch:
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.757556702+01:00
+    created: 2018-01-17T15:06:56.059809371+01:00
     description: A Helm chart for Elasticsearch
     digest: 5967e79daee8bc3ea4af95ed726ebe3557f76cb01c5bccf79cc6fe82ec2e2ddf
     name: elasticsearch
@@ -10,7 +10,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.757386963+01:00
+    created: 2018-01-17T15:06:56.059602975+01:00
     description: A Helm chart for Elasticsearch
     digest: 277a9ad3b203787bcc9e4cb710a343fc9f9f8ac59d1c5d38823a2ac6b8c0a2fc
     name: elasticsearch
@@ -18,7 +18,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.757215972+01:00
+    created: 2018-01-17T15:06:56.05940042+01:00
     description: A Helm chart for Elasticsearch
     digest: 2fa7fb1be32e88b5a1e3dde07efb86a6d9ad7b7c7eaa5bdb7c705d1bdec008db
     name: elasticsearch
@@ -27,7 +27,7 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.758051968+01:00
+    created: 2018-01-17T15:06:56.060362901+01:00
     description: A Helm chart for MySQL
     digest: e918062b2f21a6ff200bbbfb18224af0a87968390fa871c6cb816c021603ffde
     name: mysql
@@ -35,7 +35,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.757876223+01:00
+    created: 2018-01-17T15:06:56.060174217+01:00
     description: A Helm chart for MySQL
     digest: 73e8674411bc8aa779ebb609329a3e22ec5767b1644ccdab276b323015cc5bea
     name: mysql
@@ -43,7 +43,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.757717673+01:00
+    created: 2018-01-17T15:06:56.05999373+01:00
     description: A Helm chart for MySQL
     digest: e6557eb05e5c351181887a8e5683f0a706df2c893ddf3229f5619493db698556
     name: mysql
@@ -52,7 +52,7 @@ entries:
     version: 0.1.0
   postgres:
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.758550101+01:00
+    created: 2018-01-17T15:06:56.060915497+01:00
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: 094764fccf6bb2291dc5ee7dc8adb208b85a50d75d048d1f68fd0c04bc827e6c
@@ -67,7 +67,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.758307542+01:00
+    created: 2018-01-17T15:06:56.060653821+01:00
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: 76cc8dccb0dc593966112b39f37b4ad4435ba7dc5a03da68a6efa6d17108b868
@@ -83,7 +83,15 @@ entries:
     version: 0.1.0
   redis:
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.759033038+01:00
+    created: 2018-01-17T15:06:56.061611567+01:00
+    description: A Redis Cluster with Sentinel StatefulSet
+    digest: 9669ead620638b07eec60d3b59716a18fb7f3dbd55b4f9ca8436ff00e35c9d17
+    name: redis
+    urls:
+    - https://jobteaser.github.com/charts/redis-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v1
+    created: 2018-01-17T15:06:56.061440213+01:00
     description: A Redis Cluster with Sentinel StatefulSet
     digest: 23badec44cb765fc00d0658d797369387fbc16055aa8d8ada253890ebb7f59ca
     name: redis
@@ -91,7 +99,7 @@ entries:
     - https://jobteaser.github.com/charts/redis-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.758871165+01:00
+    created: 2018-01-17T15:06:56.061258685+01:00
     description: A Redis Cluster with Sentinel StatefulSet
     digest: 511ce6a5c2f3f92561356cad2398c8e6c6b520586c9610a909a48ccea6b3240a
     name: redis
@@ -99,11 +107,11 @@ entries:
     - https://jobteaser.github.com/charts/redis-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2018-01-17T14:58:53.758706384+01:00
+    created: 2018-01-17T15:06:56.061092065+01:00
     description: A Redis Cluster with Sentinel StatefulSet
     digest: aeab5b974c5d030308ba720eae58f8003e1d341dc31de3f8435450a3f2e25d16
     name: redis
     urls:
     - https://jobteaser.github.com/charts/redis-0.1.0.tgz
     version: 0.1.0
-generated: 2018-01-17T14:58:53.756943813+01:00
+generated: 2018-01-17T15:06:56.059126072+01:00
