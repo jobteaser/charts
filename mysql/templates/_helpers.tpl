@@ -27,8 +27,7 @@ Initialize data into the MySQL database if it is not present.
   [[ -d /data/mysql ]] && exit 0
   # Download datafile from the object storage provider
   mc config host add $OS_PROVIDER $OS_HOST $OS_ACCESS_KEY_ID $OS_SECRET_ACCESS_KEY
-  url=`mc share download ${OS_PROVIDER}/${OS_BUCKET}/{{ .Values.initData.datafile }} | tail -2 | head -1 | sed "s#^.*Share: ##"`
-  wget -O {{ .Values.initData.datafile }} $url
+  mc cp $OS_PROVIDER/$OS_BUCKET/{{ .Values.initData.datafile }} .
   # Untar mysql data into data persistence volume
   tar -C /data --strip-components=1 -xvf {{ .Values.initData.datafile }} mysql
   # Remove useless archive
