@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "arachni.fullname" . }}
+  labels:
+    app: {{ template "arachni.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "arachni.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+          resources:
+          args:
+          - bin/arachni_web 
+          - -o 
+          - 0.0.0.0
+          volumeMounts:
+          - name: {{ template "arachni.fullname" . }}
+            mountPath: /arachni/system/home/
+      volumes:
+      - name: {{ template "arachni.fullname" . }}
+        persistentVolumeClaim:
+          claimName: '{{ template "arachni.fullname" . }}-pvc'
+#
+#{{ toYaml .Values.resources | indent 12 }}
+#{{- if .Values.nodeSelector }}
+#      nodeSelector:
+#{{ toYaml .Values.nodeSelector | indent 8 }}
+#{{- end }}
