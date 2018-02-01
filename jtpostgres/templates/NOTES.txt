@@ -1,0 +1,25 @@
+PostgreSQL can be accessed via port 5432 on the following DNS name from within your cluster:
+{{ template "postgres.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
+
+To connect to your database run the following command (using the env variable from above):
+
+   kubectl run {{ template "postgres.fullname" . }}-client --rm -ti --image=postgres \
+   --env "PGPASSWORD=$PGPASSWORD" \{{- if and (.Values.networkPolicy.enabled) (not .Values.networkPolicy.allowExternal) }}
+   --labels="{{ template "postgres.fullname" . }}-client=true" \{{- end }}
+   -- psql -U {{ default "postgres" .Values.postgresUser }} \
+   -h {{ template "postgres.fullname" . }} {{ default "postgres" .Values.postgresDatabase }}
+
+To connect to your database directly from outside the K8s cluster:
+   {{- if contains "NodePort" .Values.service.type }}
+     PGHOST=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath='{.items[0].status.addresses[0].address}')
+     PGPORT=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "postgres.fullname" . }} -o jsonpath='{.spec.ports[0].nodePort}')
+
+   {{- else if contains "ClusterIP" .Values.service.type }}
+     PGHOST=127.0.0.1
+     PGPORT={{ default "5432" .Values.service.port }}
+
+     # Execute the following commands to route the connection:
+     export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "postgres.fullname" . }}" -o jsonpath="{.items[0].metadata.name}")
+     kubectl port-forward $POD_NAME {{ default "5432" .Values.service.port }}:{{ default "5432" .Values.service.port }}
+
+{{- end }}
