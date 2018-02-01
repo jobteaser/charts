@@ -1,0 +1,29 @@
+---
+{{- if .Values.networkPolicy.enabled }}
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ template "postgres.fullname" . }}
+  labels:
+    app: {{ template "postgres.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ template "postgres.fullname" . }}
+  ingress:
+    # Allow inbound connections
+    - ports:
+      # PostgreSQL port
+      - port: {{ .Values.service.port }}
+        protocol: TCP
+    {{- if not .Values.networkPolicy.allowExternal }}
+      from:
+      - podSelector:
+          matchLabels:
+            {{ template "postgres.fullname" . }}-client: "true"
+    {{- end }}
+{{- end }}
+

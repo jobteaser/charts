@@ -1,0 +1,10 @@
+apiVersion: v1
+description: Object-relational database management system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+name: jtpostgres
+version: 0.1.0
+home: https://www.postgresql.org/
+icon: https://www.postgresql.org/media/img/about/press/elephant.png
+engine: gotpl
+sources:
+- https://github.com/jobteaser/charts
+- https://github.com/docker-library/postgres
