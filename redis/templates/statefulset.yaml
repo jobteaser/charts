@@ -4,17 +4,17 @@ kind: StatefulSet
 metadata:
   name: {{ template "redis.fullname" . }}
   labels:
-    app: {{ template "redis.name" . }}
+    app: {{ template "redis.fullname" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   serviceName: {{ template "redis.fullname" . }}
-  replicas: {{ .Values.redis.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ template "redis.name" . }}
+        app: {{ template "redis.fullname" . }}
         chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
         release: {{ .Release.Name }}
         heritage: {{ .Release.Service }}
@@ -22,11 +22,15 @@ spec:
 {{ toYaml .Values.template.labels | indent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets }}
+      {{- end }}
       containers:
-
       #BEGIN redis
       - name: redis
         image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         command:
          - /bin/sh
          - -c
@@ -37,19 +41,30 @@ spec:
              redis-server /etc/config/slave.redis.conf
            fi
         ports:
-        - containerPort: {{ .Values.redis.port }}
+        - containerPort: {{ .Values.port }}
           name: db
         volumeMounts:
-        - name: data
-          mountPath: /data
         - name: redis-config
           mountPath: /etc/config
+        {{- if .Values.persistence.enabled }}
+        - name: {{ template "redis.fullname" . }}
+          mountPath: /data
+        {{- else }}
+        - name: empty-data
+          mountPath: /data
+        {{- end }}
+      {{- if not .Values.persistence.enabled }}
+      volumes:
+      - name: empty-data
+        emptyDir: {}
+      {{- end }}
       #END redis
 
       #BEGIN sentinel
       # The sentinel monitors redis master
       - name: sentinel
         image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         command:
           - /bin/sh
           - -c
@@ -71,11 +86,24 @@ spec:
             name: {{ template "redis.fullname" . }}
       #END sentinel
 
+  {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
-     name: data
+     name: {{ template "redis.fullname" . }}
+     labels:
+       app: {{ template "redis.fullname" . }}
+       chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+       release: {{ .Release.Name }}
+       heritage: {{ .Release.Service }}
+    {{- if .Values.persistence.annotations }}
+     annotations:
+    {{ toYaml .Values.persistence.annotations | indent 10 }}
+    {{- end}}
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes:
+      - {{ .Values.persistence.accessMode | quote }}
       resources:
         requests:
-          storage: {{ .Values.redis.diskSize }}
+          storage: {{ .Values.persistence.size | quote }}
+      storageClassName: {{ .Values.persistence.storageClass }}
+  {{- end }}

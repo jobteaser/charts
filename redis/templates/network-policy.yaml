@@ -1,0 +1,34 @@
+---
+{{- if .Values.networkPolicy.enabled }}
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ template "redis.fullname" . }}
+  labels:
+    app: {{ template "redis.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ template "redis.fullname" . }}
+  ingress:
+  # Allow inbound connections
+  - ports:
+    # Redis port
+    - port: {{ .Values.port }}
+      protocol: TCP
+    # Sentinel port
+    - port: {{ .Values.sentinel.port }}
+      protocol: TCP
+    from:
+  {{- if not .Values.networkPolicy.allowExternal }}
+    - podSelector:
+        matchLabels:
+          app: {{ template "redis.fullname" . }}
+    - podSelector:
+        matchLabels:
+          {{ template "redis.fullname" . }}-client: "true"
+  {{- end }}
+{{- end }}

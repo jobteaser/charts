@@ -1,4 +1,4 @@
 apiVersion: v1
-description: A Redis Cluster with Sentinel StatefulSet
+description: A High Availability Redis Cluster with Redis Sentinel and Kubernetes StatefulSet
 name: redis
-version: 0.2.1
+version: 1.0.0

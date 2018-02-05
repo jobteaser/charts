@@ -1,7 +1,16 @@
 {{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- $max := (int .Values.redis.replicaCount) }}
+{{- $max := (int .Values.replicaCount) }}
 Master: {{ template "redis.fullname" . }}-0.{{ template "redis.fullname" . }}
 Slaves:
 {{ range $index,$_ := untilStep 1 $max 1 -}}
 - {{ template "redis.fullname" $ }}-{{ . }}.{{ template "redis.fullname" $ }}
 {{ end }}
+
+Redis Master can be accessed via port {{ .Values.port }} on the following DNS name from within your cluster:
+{{ template "redis.fullname" . }}-0.{{ .Release.Namespace }}.svc.cluster.local
+
+To connect to your database run the following command (using the env variable from above):
+
+   kubectl run {{ template "redis.fullname" . }}-client --rm -ti --image=redis \{{- if and (.Values.networkPolicy.enabled) (not .Values.networkPolicy.allowExternal) }}
+   --labels="{{ template "redis.fullname" . }}-client=true" \{{- end }}
+   -- redis-cli
