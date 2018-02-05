@@ -1,0 +1,86 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ template "datadog.fullname" . }}
+  labels:
+    app: {{ template "datadog.name" . }}
+    chart: {{ template "datadog.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  template:
+    metadata:
+      labels:
+        app: dd-agent
+        chart: {{ template "datadog.chart" . }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+      name: dd-agent
+    spec:
+      serviceAccountName: {{ template "datadog.fullname" . }}
+      containers:
+      - image: {{ .Values.image }}
+        imagePullPolicy: Always
+        name: dd-agent
+        ports:
+          - containerPort: 8125
+            name: dogstatsdport
+            protocol: UDP
+        env:
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.app.secret_ref }}
+                key: api-key
+          - name: KUBERNETES
+            value: "yes"
+          - name: SD_BACKEND
+            value: {{ .Values.app.sd_backend }}
+          - name: KUBERNETES_NAMESPACE_NAME_REGEX
+            value: "{{ .Values.app.namespace_regexp }}"
+          - name: TAGS
+            value: "{{ .Values.app.tags }}"
+          - name: LOG_LEVEL
+            value: INFO
+          - name: DD_LOGS_STDOUT
+            value: "yes"
+
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 6 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 6 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 6 }}
+    {{- end }}
+        volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
+          - name: procdir
+            mountPath: /host/proc
+            readOnly: true
+          - name: cgroups
+            mountPath: /host/sys/fs/cgroup
+            readOnly: true
+        livenessProbe:
+          exec:
+            command:
+            - ./probe.sh
+          initialDelaySeconds: 15
+          periodSeconds: 5
+      volumes:
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersocket
+        - hostPath:
+            path: /proc
+          name: procdir
+        - hostPath:
+            path: /sys/fs/cgroup
+          name: cgroups

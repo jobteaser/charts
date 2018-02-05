@@ -1,0 +1,25 @@
+
+image: datadog/docker-dd-agent:latest
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
+    memory: "512Mi"
+    cpu: "250m"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+rbac:
+  enabled: true
+
+app:
+  secret_ref: datadog-integration
+  sd_backend: docker
+  namespace_regexp: ""
+  tags: ""
