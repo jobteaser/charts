@@ -1,12 +1,40 @@
-redis:
-  port: 6379
-  replicaCount: 3
-  diskSize: 8Gi
+---
+image: "redis:3.2"
+
+port: 6379
+replicaCount: 3
+
+## Specify a imagePullPolicy
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+# imagePullPolicy:
+
+## Specify imagePullSecrets
+## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+##
+# imagePullSecrets: myregistrykey
+
+## Persist data to a persitent volume
+persistence:
+  enabled: false
+
+  ## database data Persistent Volume Storage Class
+  ##
+  # storageClass: gp2
+  # accessMode: ReadWriteOnce
+  # size: 8Gi
+
+  # annotations: {}
+
+## Use sentinel to have a high availability redis cluster
+## ref: https://redis.io/topics/sentinel
 sentinel:
+
+  ## Configure the redis sentinel container
+  ##
   quorum: 2
   port: 26379
 
-image: "redis:3.2"
 
 template:
   labels: {}
@@ -14,3 +42,15 @@ template:
     # necessary, and remove the curly braces after 'labels:'.
     # tier: db
     # component: redis
+
+networkPolicy:
+    ## Enable creation of NetworkPolicy resources.
+    ##
+    enabled: false
+
+    ## The Policy model to apply. When set to false, only pods with the correct
+    ## client label will have network access to the port Redis is listening
+    ## on. When true, Redis will accept connections from any source
+    ## (with the correct destination port).
+    ##
+    # allowExternal:

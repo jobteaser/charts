@@ -8,30 +8,30 @@ data:
   #BEGIN master
   master.redis.conf: |-
     bind 0.0.0.0
-    port {{ .Values.redis.port }}
+    port {{ .Values.port }}
     dir .
 
   master.sentinel.conf: |-
     bind 0.0.0.0
     port {{ .Values.sentinel.port }}
-    sentinel monitor {{ template "redis.name" . }}-redis-cluster 127.0.0.1 {{ .Values.redis.port }} {{ .Values.sentinel.quorum }}
-    sentinel down-after-milliseconds {{ template "redis.name" . }}-redis-cluster 5000
-    sentinel parallel-syncs {{ template "redis.name" . }}-redis-cluster 1
-    sentinel failover-timeout {{ template "redis.name" . }}-redis-cluster 10000
+    sentinel monitor {{ template "redis.fullname" . }}-redis-cluster 127.0.0.1 {{ .Values.port }} {{ .Values.sentinel.quorum }}
+    sentinel down-after-milliseconds {{ template "redis.fullname" . }}-redis-cluster 5000
+    sentinel parallel-syncs {{ template "redis.fullname" . }}-redis-cluster 1
+    sentinel failover-timeout {{ template "redis.fullname" . }}-redis-cluster 10000
   #END master
 
   #BEGIN slave
   slave.redis.conf: |-
     bind 0.0.0.0
-    port {{ .Values.redis.port }}
+    port {{ .Values.port }}
     dir .
-    slaveof {{ .Release.Name }}-redis-0.{{ template "redis.fullname" . }} {{ .Values.redis.port }}
+    slaveof {{ .Release.Name }}-redis-0.{{ template "redis.fullname" . }} {{ .Values.port }}
 
   slave.sentinel.conf: |-
     bind 0.0.0.0
     port {{ .Values.sentinel.port }}
-    sentinel monitor {{ template "redis.name" . }}-redis-cluster {{ .Release.Name }}-redis-0.{{ template "redis.fullname" . }} {{ .Values.redis.port }} {{ .Values.sentinel.quorum }}
-    sentinel down-after-milliseconds {{ template "redis.name" . }}-redis-cluster 5000
-    sentinel parallel-syncs {{ template "redis.name" . }}-redis-cluster 1
-    sentinel failover-timeout {{ template "redis.name" . }}-redis-cluster 10000
+    sentinel monitor {{ template "redis.fullname" . }}-redis-cluster {{ .Release.Name }}-redis-0.{{ template "redis.fullname" . }} {{ .Values.port }} {{ .Values.sentinel.quorum }}
+    sentinel down-after-milliseconds {{ template "redis.fullname" . }}-redis-cluster 5000
+    sentinel parallel-syncs {{ template "redis.fullname" . }}-redis-cluster 1
+    sentinel failover-timeout {{ template "redis.fullname" . }}-redis-cluster 10000
   #END slave
