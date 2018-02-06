@@ -13,6 +13,10 @@ spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
+        {{- if not .Values.datadog.enabled }}
+      annotations:
+        service-discovery.datadoghq.com/redis.check_names: '[]'
+        {{- end }}
       labels:
         app: {{ template "redis.fullname" . }}
         chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}

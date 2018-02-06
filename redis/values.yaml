@@ -56,3 +56,8 @@ networkPolicy:
     ## (with the correct destination port).
     ##
     # allowExternal:
+
+## Datadog integration
+datadog:
+  # Enable datadog agent autodiscovery
+  enabled: false
