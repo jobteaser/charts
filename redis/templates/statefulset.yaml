@@ -49,18 +49,11 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: {{ template "redis.fullname" . }}
           mountPath: /data
-        {{- else }}
-        - name: empty-data
-          mountPath: /data
         {{- end }}
-      {{- if not .Values.persistence.enabled }}
-      volumes:
-      - name: empty-data
-        emptyDir: {}
-      {{- end }}
       #END redis
 
       #BEGIN sentinel
+      {{- if .Values.sentinel.enabled }}
       # The sentinel monitors redis master
       - name: sentinel
         image: "{{ .Values.image }}"
@@ -80,11 +73,12 @@ spec:
         volumeMounts:
         - name: redis-config
           mountPath: /etc/config
+      {{- end }}
+      #END sentinel
       volumes:
         - name: redis-config
           configMap:
             name: {{ template "redis.fullname" . }}
-      #END sentinel
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:

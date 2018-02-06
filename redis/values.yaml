@@ -29,13 +29,15 @@ persistence:
 ## Use sentinel to have a high availability redis cluster
 ## ref: https://redis.io/topics/sentinel
 sentinel:
+  enabled: false
 
   ## Configure the redis sentinel container
   ##
-  quorum: 2
-  port: 26379
+  # quorum: 2
+  # port: 26379
 
 
+## Add custom label to statefulset redis instances
 template:
   labels: {}
     # To define specific labels, uncomment the following lines, adjust them as
