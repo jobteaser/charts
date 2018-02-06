@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ template "kubernetes-filebeat.fullname" . }}
+  labels:
+    {{- if .Values.cluster_service }}
+    k8s-app: {{ template "kubernetes-filebeat.fullname" . }}
+    kubernetes.io/cluster-service: "true"
+    {{- end }}
+    app: {{ template "kubernetes-filebeat.name" . }}
+    chart: {{ template "kubernetes-filebeat.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  template:
+    metadata:
+      labels:
+        {{- if .Values.cluster_service }}
+        k8s-app: {{ template "kubernetes-filebeat.fullname" . }}
+        kubernetes.io/cluster-service: "true"
+        {{- end }}
+        app: {{ template "kubernetes-filebeat.name" . }}
+        chart: {{ template "kubernetes-filebeat.chart" . }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+    spec:
+      serviceAccountName: filebeat
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: filebeat
+        image: "docker.elastic.co/beats/filebeat:{{ .Values.app.version }}"
+        args: [ "-c", "/etc/filebeat.yml", "-e" ]
+        securityContext:
+          runAsUser: 0
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: config
+          mountPath: /etc/filebeat.yml
+          readOnly: true
+          subPath: filebeat.yml
+        - name: prospectors
+          mountPath: /usr/share/filebeat/prospectors.d
+          readOnly: true
+        - name: data
+          mountPath: /usr/share/filebeat/data
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          defaultMode: 0600
+          name: {{ template "kubernetes-filebeat.fullname" . }}-config
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+      - name: prospectors
+        configMap:
+          defaultMode: 0600
+          name: {{ template "kubernetes-filebeat.fullname" . }}-prospectors
+      - name: data
+        emptyDir: {}
