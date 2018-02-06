@@ -49,3 +49,15 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
+
+networkPolicy:
+    ## Enable creation of NetworkPolicy resources.
+    ##
+    enabled: false
+
+    ## The Policy model to apply. When set to false, only pods with the correct
+    ## client label will have network access to the port ElasticSearch is listening
+    ## on. When true, ElasticSearch will accept connections from any source
+    ## (with the correct destination port).
+    ##
+    # allowExternal:

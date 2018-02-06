@@ -1,1 +1,7 @@
  ES url: http://{{ template "elasticsearch.fullname" . }}:{{ .Values.service.externalPort }}
+
+To connect to your database run the following command (using the env variable from above):
+
+   kubectl run {{ template "elasticsearch.fullname" . }}-client --rm -ti --image=ubuntu \{{- if and (.Values.networkPolicy.enabled) (not .Values.networkPolicy.allowExternal) }}
+   --labels="{{ template "elasticsearch.fullname" . }}-client=true" \{{- end }}
+   -- /bin/bash
