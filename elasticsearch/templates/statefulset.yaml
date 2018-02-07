@@ -12,6 +12,10 @@ spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
+      annotations:
+        io.collectbeat.logs.{{ template "elasticsearch.name" . }}/pattern: "^\[[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        io.collectbeat.logs.{{ template "elasticsearch.name" . }}/negate: true
+        io.collectbeat.logs.{{ template "elasticsearch.name" . }}/match: after
       labels:
         app: {{ template "elasticsearch.name" . }}
         chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
