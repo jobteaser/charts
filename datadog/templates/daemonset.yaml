@@ -44,6 +44,8 @@ spec:
             value: INFO
           - name: DD_LOGS_STDOUT
             value: "yes"
+          - name: DD_LOG_ENABLED
+            value: "{{ .Values.app.log.enabled }}"
 
         resources:
 {{ toYaml .Values.resources | indent 10 }}
@@ -68,6 +70,10 @@ spec:
           - name: cgroups
             mountPath: /host/sys/fs/cgroup
             readOnly: true
+          {{- if .Values.app.log.enabled }}
+          - name: logbuffer
+            mountPath: /opt/datadog-agent/run
+          {{- end }}
         livenessProbe:
           exec:
             command:
@@ -84,3 +90,7 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
+        {{- if .Values.app.log.enabled }}
+        - name: logbuffer
+          emptyDir: {}
+        {{- end }}
