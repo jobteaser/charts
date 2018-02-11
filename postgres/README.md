@@ -20,13 +20,13 @@ The command deploys PostgreSQL on the Kubernetes cluster in the default configur
 The following tables lists the configurable parameters of the PostgresSQL chart and their default values.
 
 ### Basic
-| Parameter                  | Description                                     | Default                                                    |
-| -----------------------    | ---------------------------------------------   | ---------------------------------------------------------- |
-| `image`                    | `postgres` image repository and tag             | `postgres:9.6`                                             |
-| `imagePullPolicy`          | Image pull policy                               | `Always` if `imageTag` is `latest`, else `IfNotPresent`    |
-| `imagePullSecrets`         | Image pull secrets                              | `nil`                                                      |
-| `postgresUser`             | Username of new user to create.                 | `postgres`                                                 |
-| `postgresDatabase`         | Name for new database to create.                | `postgres`                                                 |
+| Parameter          | Description                         | Default                                                 |
+| ---                | ---                                 | ---                                                     |
+| `image`            | `postgres` image repository and tag | `postgres:9.6`                                          |
+| `imagePullPolicy`  | Image pull policy                   | `Always` if `imageTag` is `latest`, else `IfNotPresent` |
+| `imagePullSecrets` | Image pull secrets                  | `nil`                                                   |
+| `postgresUser`     | Username of new user to create.     | `postgres`                                              |
+| `postgresDatabase` | Name for new database to create.    | `postgres`                                              |
 
 ### Expert
 | Parameter                  | Description                                     | Default                                                    |
