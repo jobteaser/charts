@@ -25,6 +25,16 @@ secret:
   # secretName:
   # postgresPassword:
 
+initData:
+  enabled: false
+
+  # datafile:
+  # imageTag: latest
+  # objectStorage:
+  #   provider:
+  #   bucket:
+  #   host:
+  #   secretKeyRefName:
 
 ## Persist data to a persitent volume
 persistence:
