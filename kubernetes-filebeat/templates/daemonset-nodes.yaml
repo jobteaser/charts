@@ -1,34 +1,34 @@
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: {{ template "kubernetes-filebeat.fullname" . }}
+  name: {{ template "kubernetes-filebeat.fullname" . }}-nodes
   labels:
-    {{- if .Values.cluster_service }}
-    k8s-app: {{ template "kubernetes-filebeat.fullname" . }}
-    kubernetes.io/cluster-service: "true"
-    {{- end }}
     app: {{ template "kubernetes-filebeat.name" . }}
     chart: {{ template "kubernetes-filebeat.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+  annotations:
+    checksum/config: {{ include "conf_node" . | sha256sum }}
 spec:
   template:
     metadata:
       labels:
-        {{- if .Values.cluster_service }}
-        k8s-app: {{ template "kubernetes-filebeat.fullname" . }}
-        kubernetes.io/cluster-service: "true"
-        {{- end }}
         app: {{ template "kubernetes-filebeat.name" . }}
         chart: {{ template "kubernetes-filebeat.chart" . }}
         release: {{ .Release.Name }}
         heritage: {{ .Release.Service }}
+        profile: node
+      annotations:
+        checksum/config: {{ include "conf_node" . | sha256sum }}
     spec:
       serviceAccountName: filebeat
       terminationGracePeriodSeconds: 30
+      nodeSelector:
+        'kubernetes.io/role': node
       containers:
       - name: filebeat
-        image: "docker.elastic.co/beats/filebeat:{{ .Values.app.version }}"
+        image: "{{ .Values.app.node_image }}"
+        imagePullPolicy: Always
         args: [ "-c", "/etc/filebeat.yml", "-e" ]
         securityContext:
           runAsUser: 0
@@ -43,9 +43,6 @@ spec:
           mountPath: /etc/filebeat.yml
           readOnly: true
           subPath: filebeat.yml
-        - name: prospectors
-          mountPath: /usr/share/filebeat/prospectors.d
-          readOnly: true
         - name: data
           mountPath: /usr/share/filebeat/data
         - name: varlibdockercontainers
@@ -55,13 +52,24 @@ spec:
       - name: config
         configMap:
           defaultMode: 0600
-          name: {{ template "kubernetes-filebeat.fullname" . }}-config
+          name: {{ template "kubernetes-filebeat.fullname" . }}-config-node
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-      - name: prospectors
-        configMap:
-          defaultMode: 0600
-          name: {{ template "kubernetes-filebeat.fullname" . }}-prospectors
       - name: data
         emptyDir: {}
+
+---
+# Node config
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "kubernetes-filebeat.fullname" . }}-config-node
+  labels:
+    app: {{ template "kubernetes-filebeat.name" . }}
+    chart: {{ template "kubernetes-filebeat.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  filebeat.yml: |-
+{{- include "conf_node" . | indent 4 }}
