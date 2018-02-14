@@ -1,8 +1,9 @@
 
 app:
   cluster_service: true
-  image: docker.elastic.co/beats/filebeat
-  version: 6.1.3
+  master_image:  docker.elastic.co/beats/filebeat:6.2.1
+  node_image: docker.elastic.co/beats/filebeat:6.2.1
+
   elasticsearch_host: elasticsearch
   elasticsearch_port: 9200
 
