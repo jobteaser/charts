@@ -46,7 +46,7 @@ spec:
           readOnly: true
           subPath: filebeat.yml
         - name: data
-          mountPath: /usr/share/filebeat/data
+          mountPath: /usr/share/filebeat/data/
         - name: varlog
           mountPath: /var/log/
           readOnly: true
@@ -59,7 +59,9 @@ spec:
         hostPath:
           path: /var/log
       - name: data
-        emptyDir: {}
+        hostPath:
+          type: DirectoryOrCreate
+          path: /opt/filebeat
 
 ---
 # Node config

@@ -44,7 +44,7 @@ spec:
           readOnly: true
           subPath: filebeat.yml
         - name: data
-          mountPath: /usr/share/filebeat/data
+          mountPath: /usr/share/filebeat/data/
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
@@ -57,7 +57,9 @@ spec:
         hostPath:
           path: /var/lib/docker/containers
       - name: data
-        emptyDir: {}
+        hostPath:
+          type: DirectoryOrCreate
+          path: /opt/filebeat
 
 ---
 # Node config
