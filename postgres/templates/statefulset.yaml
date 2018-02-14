@@ -26,6 +26,34 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.imagePullSecrets }}
       {{- end }}
+      {{- if .Values.initData.enabled }}
+      initContainers:
+      - name: init-data
+        image: "minio/mc:{{ .Values.initData.imageTag }}"
+        env:
+        - name: OS_PROVIDER
+          value: {{ .Values.initData.objectStorage.provider | quote }}
+        - name: OS_BUCKET
+          value: {{ .Values.initData.objectStorage.bucket | quote }}
+        - name: OS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.initData.objectStorage.secretKeyRefName }}
+              key: access-key-id
+        - name: OS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.initData.objectStorage.secretKeyRefName }}
+              key: secret-access-key
+        - name: OS_HOST
+          value: {{ .Values.initData.objectStorage.host | quote }}
+        command:
+        {{- include "postgres.initData" . | indent 10 }}
+        volumeMounts:
+        - name: {{ template "postgres.fullname" . }}
+          mountPath: /data
+          subPath: {{ default "postgresql-db" .Values.persistence.subpath | quote }}
+      {{- end }}
       containers:
       - name: postgres
         image: "{{ .Values.image }}"
