@@ -3,24 +3,24 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 
-database: mydatabase
+database: mysql
 # We are looking for root_password, username and password in this secret.
 secretKeyRefName: mysql
 
 image: mysql:5.6
 
 initData:
-  enabled: true
+  enabled: false
   image: minio/mc:latest
-  # datafile: my.data.file.path
+  # datafile:
   objectStorage: {}
     # To define object storage values, uncomment the following lines, adjust them as
     # necessary, and remove the curly braces after 'objectStorage:'.
-    # provider: s3
-    # bucket: mybucket
-    # host: https://<objectStorage-host>:9000
+    # provider:
+    # bucket:
+    # host:
     # We are looking for access-key-id and secret-access-key in this secret.
-    # secretKeyRefName: object-storage
+    # secretKeyRefName:
 
 service:
   name: mysql
@@ -39,6 +39,18 @@ template:
     # necessary, and remove the curly braces after 'labels:'.
     # tier: db
     # component: mysql
+
+networkPolicy:
+    ## Enable creation of NetworkPolicy resources.
+    ##
+    enabled: false
+
+    ## The Policy model to apply. When set to false, only pods with the correct
+    ## client label will have network access to the port PostgreSQL is listening
+    ## on. When true, PostgreSQL will accept connections from any source
+    ## (with the correct destination port).
+    ##
+    # allowExternal:
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
