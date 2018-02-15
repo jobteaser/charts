@@ -1,0 +1,28 @@
+{{- if .Values.networkPolicy.enabled }}
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ template "mysql.fullname" . }}
+  labels:
+    app: {{ template "mysql.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ template "mysql.fullname" . }}
+  ingress:
+    # Allow inbound connections
+    - ports:
+      # MySQL port
+      - port: {{ .Values.service.externalPort }}
+        protocol: TCP
+    {{- if not .Values.networkPolicy.allowExternal }}
+      from:
+      - podSelector:
+          matchLabels:
+            mysql-client: {{ template "mysql.fullname" . }}
+    {{- end }}
+{{- end }}
+
