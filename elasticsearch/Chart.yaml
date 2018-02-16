@@ -1,4 +1,4 @@
 apiVersion: v1
 description: A Helm chart for Elasticsearch
 name: elasticsearch
-version: 0.3.0
+version: 1.0.0
