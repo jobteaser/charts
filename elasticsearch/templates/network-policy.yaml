@@ -28,6 +28,6 @@ spec:
           release: {{ .Release.Name }}
     - podSelector:
         matchLabels:
-          {{ template "elasticsearch.fullname" . }}-client: "true"
+          elasticsearch-client: {{ template "elasticsearch.fullname" . }}
   {{- end }}
 {{- end }}
