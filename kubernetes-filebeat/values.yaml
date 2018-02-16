@@ -4,13 +4,20 @@ app:
   master_image:  docker.elastic.co/beats/filebeat:6.2.1
   node_image: docker.elastic.co/beats/filebeat:6.2.1
 
-  elasticsearch_host: elasticsearch
-  elasticsearch_port: 9200
+loglevel: info
 
-  # Enable elasticsearch basic authentication
-  elasticsearch_auth_enabled: false
-  #elasticsearch_username: elastic
-  #elasticsearch_password
+## Configure logstash
+#output:
+#  logstash:
+#    hosts: [ 'logstash' ]
+
+## Configure elasticsearch output
+#output:
+#  elasticsearch:
+#    hosts: ['http://elasticsearch']
+#    username:
+#    password:
+output: {}
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -23,9 +30,3 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

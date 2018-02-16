@@ -7,12 +7,8 @@ filebeat.config:
 processors:
   - add_cloud_metadata:
 
-output.elasticsearch:
-  hosts: ['{{ .Values.app.elasticsearch_host }}']
-  {{- if .Values.app.elastic_auth_enabled }}
-  username: {{ .Values.app.elasticsearch_username }}
-  password: {{ .Values.app.elasticsearch_password }}
-  {{- end }}
+output:
+{{ toYaml .Values.output | indent 2 }}
 
 filebeat.prospectors:
 # apiserver

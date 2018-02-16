@@ -5,16 +5,12 @@ processors:
   - add_kubernetes_metadata:
       in_cluster: true
 
-output.elasticsearch:
-  hosts: ['{{ .Values.app.elasticsearch_host }}']
-  {{- if .Values.app.elastic_auth_enabled }}
-  username: {{ .Values.app.elasticsearch_username }}
-  password: {{ .Values.app.elasticsearch_password }}
-  {{- end }}
+output:
+{{ toYaml .Values.output | indent 2 }}
 
 logging:
   to_files: false
-  level: info
+  level: {{ .Values.loglevel }}
   metrics.enabled: false
 
 filebeat.autodiscover:
