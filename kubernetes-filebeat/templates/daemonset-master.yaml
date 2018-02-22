@@ -9,11 +9,12 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
         app: {{ template "kubernetes-filebeat.name" . }}
-        chart: {{ template "kubernetes-filebeat.chart" . }}
         release: {{ .Release.Name }}
         heritage: {{ .Release.Service }}
         profile: master
