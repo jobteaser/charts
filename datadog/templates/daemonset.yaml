@@ -8,6 +8,8 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -15,6 +17,10 @@ spec:
         chart: {{ template "datadog.chart" . }}
         release: {{ .Release.Name }}
         heritage: {{ .Release.Service }}
+      annotations:
+        log/format: "multiline"
+        log/multiline_pattern: '^\d{4}-\d{2}-\d{2}'
+        log/multiline_negate: 'true'
       name: dd-agent
     spec:
       serviceAccountName: {{ template "datadog.fullname" . }}
