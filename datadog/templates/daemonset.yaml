@@ -36,16 +36,16 @@ spec:
           - name: API_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.app.secret_ref }}
+                name: {{ .Values.secret_ref }}
                 key: api-key
           - name: KUBERNETES
             value: "yes"
           - name: SD_BACKEND
-            value: {{ .Values.app.sd_backend }}
+            value: {{ .Values.sd_backend }}
           - name: KUBERNETES_NAMESPACE_NAME_REGEX
-            value: "{{ .Values.app.namespace_regexp }}"
+            value: "{{ .Values.namespace_regexp }}"
           - name: TAGS
-            value: "{{ .Values.app.tags }}"
+            value: "{{ .Values.tags }}"
           - name: LOG_LEVEL
             value: INFO
           - name: DD_LOGS_STDOUT

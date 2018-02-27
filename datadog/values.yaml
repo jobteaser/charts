@@ -17,9 +17,9 @@ affinity: {}
 
 rbac:
   enabled: true
-
-app:
-  secret_ref: datadog-integration
-  sd_backend: docker
-  namespace_regexp: ""
-  tags: ""
+# If api_key is non empty, secret is created on the fly
+#api_key:
+secret_ref: datadog-integration
+sd_backend: docker
+namespace_regexp: ""
+tags: ""
