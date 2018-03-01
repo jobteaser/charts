@@ -15,10 +15,17 @@ spec:
         app: {{ template "kubectl-oidc-helper.name" . }}
         release: {{ .Release.Name }}
     spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: {{ template "kubectl-oidc-helper.fullname" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           args:
@@ -28,6 +35,7 @@ spec:
           - "--k8s-api={{ .Values.app.k8sApi }}"
           - "--listen=http://0.0.0.0:5555"
           - "--redirect-uri={{ .Values.app.redirectUri }}"
+          - "--k8s-cert=/etc/config/ca.crt"
 
           resources:
 {{ toYaml .Values.resources | indent 12 }}
