@@ -14,6 +14,8 @@ spec:
       labels:
         app: {{ template "kubectl-oidc-helper.name" . }}
         release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       volumes:
       - name: config-volume
