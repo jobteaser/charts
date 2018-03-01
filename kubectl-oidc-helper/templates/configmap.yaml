@@ -7,4 +7,4 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  ca.crt: {{ .Values.cert }}
+  ca.crt: {{ .Values.app.cert }}
