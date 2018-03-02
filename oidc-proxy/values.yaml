@@ -1,0 +1,37 @@
+# Default values for oidc-proxy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: evry/oidc-proxy
+  tag: v1.0.0
+  pullPolicy: IfNotPresent
+service:
+  externalPort: 80
+
+ingress:
+  enabled: false
+  tls: false
+  # Used to create an Ingress record.
+  hosts:
+  - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+oid:
+  discover: https://my-auth-server/auth
+  client_id: my-client
+  proxy_protocol: http
+  #proxy_host:
+  proxy_port: 80
+

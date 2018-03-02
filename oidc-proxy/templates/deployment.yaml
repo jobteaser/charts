@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "oidc-proxy.fullname" . }}
+  labels:
+    app: {{ template "oidc-proxy.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "oidc-proxy.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: OID_DISCOVERY
+            value: {{ .Values.oid.discovery | quote }}
+          - name: OID_CLIENT_ID
+            value: {{ .Values.oid.client_id | quote }}
+          - name: OID_CLIENT_SECRET
+            value: {{ .Values.oid.client_secret | quote }}
+
+          - name: PROXY_PROTOCOL
+            value: {{ .Values.oid.proxy_protocol | quote }}
+          - name: PROXY_HOST
+            value: {{ .Values.oid.proxy_host | quote }}
+          - name: PROXY_PORT
+            value: {{ .Values.oid.proxy_port | quote }}
+
+          - name: OID_SESSION_CHECK_SSI
+            value: {{ .Values.oid.ssi | quote }}
+          - name: OID_SESSION_SECRET
+            value: pouetpouet
+          - name: OID_SESSION_NAME
+            value: {{ template "oidc-proxy.fullname" . }}_session
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
