@@ -18,6 +18,7 @@ rules:
       - "namespaces"
       - "events"
       - "services"
+      - "endpoints"
     verbs: ["get", "list"]
 
   - apiGroups: [""]
