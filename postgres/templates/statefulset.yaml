@@ -21,6 +21,9 @@ spec:
         release: {{ .Release.Name }}
         tier: backend
         component: db
+      annotations:
+        log/pattern: "[A-Z]+:"
+        log/negate: true
     spec:
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
