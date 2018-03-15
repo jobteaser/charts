@@ -22,8 +22,8 @@ secret:
   ## Use secret store to set postgres user password
   ## ref: https://kubernetes.io/docs/concepts/configuration/secret/
   ##
-  # secretName:
-  # postgresPassword:
+  # secretName: # default to {{ .Release.Name }}-secret
+  postgresPassword: postgres_password
 
 initData:
   enabled: false
