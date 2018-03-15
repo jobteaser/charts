@@ -24,7 +24,7 @@ spec:
         component: db
       annotations:
         log/pattern: "[A-Z]+:"
-        log/negate: true
+        log/negate: "true"
     spec:
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
