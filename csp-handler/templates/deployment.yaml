@@ -14,12 +14,12 @@ spec:
       app: {{ template "csp-handler.name" . }}
       release: {{ .Release.Name }}
   template:
-    annotations:
-      log/format: json
     metadata:
       labels:
         app: {{ template "csp-handler.name" . }}
         release: {{ .Release.Name }}
+      annotations:
+        log/format: json
     spec:
       containers:
         - name: {{ .Chart.Name }}
