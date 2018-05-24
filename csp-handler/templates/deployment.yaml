@@ -24,6 +24,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/csp-handler", "serve", "-p", "3000"]
+          envFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRef.name }}
           ports:
             - name: http
               containerPort: 3000
