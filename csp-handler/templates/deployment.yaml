@@ -27,8 +27,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/csp-handler", "serve", "-p", "3000"]
           envFrom:
-            secretKeyRef:
-              name: {{ .Values.secretKeyRef.name }}
+            - secretRef:
+                name: {{ .Values.secretKeyRef.name }}
           ports:
             - name: http
               containerPort: 3000
