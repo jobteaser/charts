@@ -8,14 +8,23 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "elasticsearch.name" . }}
+      chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+      release: {{ .Release.Name }}
+      heritage: {{ .Release.Service }}
+      {{- if .Values.template.labels }}
+{{ toYaml .Values.template.labels | indent 6 }}
+      {{- end }}
   serviceName: {{ template "elasticsearch.name" . }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       annotations:
         log/pattern: "^\\[[0-9]{4}-[0-9]{2}-[0-9]{2}"
-        log/negate: true
-        log/match: after
+        log/negate: "true"
+        log/match: "after"
       labels:
         app: {{ template "elasticsearch.name" . }}
         chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
