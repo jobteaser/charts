@@ -9,7 +9,9 @@ filebeat.prospectors:
   - type: log
     paths:
       - /var/log/host-logs/kern.log
-    tags: ["kernel_log"]
+    fields:
+      source: kernel
+    fields_under_root: true
 
 output:
 {{ toYaml .Values.output | indent 2 }}
