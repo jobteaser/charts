@@ -5,6 +5,12 @@ processors:
   - add_kubernetes_metadata:
       in_cluster: true
 
+filebeat.prospectors:
+  - type: log
+    paths:
+      - /var/log/host-logs/kern.log
+    tags: ["kernel_log"]
+
 output:
 {{ toYaml .Values.output | indent 2 }}
 

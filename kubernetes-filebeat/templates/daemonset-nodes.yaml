@@ -49,6 +49,9 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
+        - mountPath: /var/log/host-logs
+          name: host-logs
+          readOnly: true
       volumes:
       - name: config
         configMap:
@@ -61,6 +64,10 @@ spec:
         hostPath:
           type: DirectoryOrCreate
           path: /opt/filebeat
+      - hostPath:
+          path: /var/log
+          type: Directory
+        name: host-logs
 
 ---
 # Node config
