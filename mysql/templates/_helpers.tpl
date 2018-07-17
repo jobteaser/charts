@@ -27,7 +27,7 @@ Initialize data into the MySQL database if it is not present.
   [[ -d /data/mysql ]] && exit 0
   # Download datafile from the object storage provider
   set +ex # Remove logging to avoid credentials leaking
-  mc config host add $OS_PROVIDER $OS_HOST $OS_ACCESS_KEY_ID $OS_SECRET_ACCESS_KEY
+  mc config host add $OS_PROVIDER $OS_HOST $OS_ACCESS_KEY_ID $OS_SECRET_ACCESS_KEY --api S3v4
   set -ex
   mc cp $OS_PROVIDER/$OS_BUCKET/{{ .Values.initData.datafile }} .
   # Untar mysql data into data persistence volume
