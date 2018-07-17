@@ -27,7 +27,7 @@ Initialize data into the Postgresql database if it is not present.
   [[ -d /data/pgdata ]] && exit 0
   mkdir -p /data/pgdata
   # Download datafile from the object storage provider
-  mc config host add $OS_PROVIDER $OS_HOST $OS_ACCESS_KEY_ID $OS_SECRET_ACCESS_KEY
+  mc config host add $OS_PROVIDER $OS_HOST $OS_ACCESS_KEY_ID $OS_SECRET_ACCESS_KEY --api S3v4
   mc cp $OS_PROVIDER/$OS_BUCKET/{{ .Values.initData.datafile }} .
   # Untar mysql data into data persistence volume
   tar -C /data/pgdata --strip-components=1 -xvf {{ .Values.initData.datafile }} data
