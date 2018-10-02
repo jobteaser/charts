@@ -50,5 +50,7 @@ The following tables lists the configurable parameters of the PostgresSQL chart 
 | `initData.objectStorage.bucket`           | Bucket name                                              | `nil`                                     |
 | `initData.objectStorage.host`             | Host of the object storage                               | `nil`                                     |
 | `initData.objectStorage.secretKeyRefName` | Secret name which contains the access key and secret key | `nil`                                     |
+| `networkPolicy.enabled` | Enable network policy | `false`                                     |
+| `networkPolicy.allowExternal` | Allow connection from outisde the namespace | `nil`                                     |
 
 
