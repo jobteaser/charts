@@ -36,7 +36,7 @@ The following tables lists the configurable parameters of the PostgresSQL chart 
 | `secret.postgresPassword`                 | Secret store key for postgres password                   | `nil`                                       |
 | `persistence.enabled`                     | Use a PVC to persist data                                | `false`                                     |
 | `persistence.storageClass`                | Storage class of backing PVC                             | `nil` (uses alpha storage class annotation) |
-| `persistence.accessMode`                  | Use volume as ReadOnly or ReadWriteOnce                  | `ReadWriteOnce`                             |
+| `persistence.accessMode`                  | Use volume as ReadOnly or ReadWriteOnce                  | ``                             |
 | `persistence.annotations`                 | Persistent Volume annotations                            | `{}`                                        |
 | `persistence.size`                        | Size of data volume                                      | `8Gi`                                       |
 | `persistence.subPath`                     | Subdirectory of the volume to mount at                   | `postgresql-db`                             |
