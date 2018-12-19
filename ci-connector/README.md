@@ -2,9 +2,9 @@
 
 ## Installation
 
-The main parameter is `script` that represents the ruby script
-```
-# file: values.override.yaml
+Create your ruby script
+```ruby
+# file: myscript.rb
 
 script: |
   require "CI/connector"
@@ -30,5 +30,5 @@ script: |
 
 Then deploy
 ```
-helm upgrade --install -f values.override.yaml --name my-connector jobteaser/ci-connector
+helm upgrade --install --set-file script=myscript.rb jobteaser/ci-connector
 ```
