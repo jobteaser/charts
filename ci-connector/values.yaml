@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-image: docker.k8s.jobteaser.net/coretech/ci-connector:latest
+image: jobteaser/ci-connector:latest
 pullPolicy: IfNotPresent
 
 nameOverride: ""
