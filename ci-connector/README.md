@@ -24,7 +24,7 @@ trap("INT") { conn.stop }
 ### Basic
 | Parameter                     | Description                                     | Default                                                    |
 | -----------------------       | ---------------------------------------------   | ---------------------------------------------------------- |
-| `image`                       | image repository and tag                        | `docker.k8s.jobteaser.net/coretech/ci-connector:latest`    |
+| `image`                       | image repository and tag                        | `jobteaser/ci-connector:latest`    |
 | `script`                      | the ruby script                                 | ``                                                   |
 
 Then deploy
