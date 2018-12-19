@@ -6,19 +6,18 @@ Create your ruby script
 ```ruby
 # file: myscript.rb
 
-script: |
-  require "CI/connector"
-  
-  conn = CI::Connector.from_env()
-  conn.on('github.pull_request') do |event|
-    if event['action'] == 'closed'
-      conn.logger.info "Close #{event['repository']['full_name']} PR #{event['number']}"
-    end
-  end
-  conn.start
-  
-  trap("TERM") { conn.stop }
-  trap("INT") { conn.stop }
+require "CI/connector"
+
+conn = CI::Connector.from_env()
+conn.on('github.pull_request') do |event|
+if event['action'] == 'closed'
+  conn.logger.info "Close #{event['repository']['full_name']} PR #{event['number']}"
+end
+end
+conn.start
+
+trap("TERM") { conn.stop }
+trap("INT") { conn.stop }
 
 ```
 
