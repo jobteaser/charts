@@ -11,14 +11,12 @@ image: mysql:5.6
 
 initData:
   enabled: false
-  image: minio/mc:latest
+  image: jobteaser/awscli:latest
   # datafile:
   objectStorage: {}
     # To define object storage values, uncomment the following lines, adjust them as
     # necessary, and remove the curly braces after 'objectStorage:'.
-    # provider:
     # bucket:
-    # host:
     # We are looking for access-key-id and secret-access-key in this secret.
     # secretKeyRefName:
 
