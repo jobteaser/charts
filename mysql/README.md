@@ -27,23 +27,21 @@ The following tables lists the configurable parameters of the MySQL chart and th
 | `secretKeyRefName` | K8s secret name with `root_password`, `username` and `password` keys to setup MySQL. If set to `nil`, it will generate a random root password | `nil`       |
 
 ### Expert
-| Parameter                                 | Description                                                         | Default           |
-| ---                                       | ---                                                                 | ---               |
-| `initData.enabled`                        | Use init container to inject data into MySQL                        | `false`           |
-| `initData.image`                          | Image and tag used by the init container of data initialization     | `minio/mc:latest` |
-| `initData.datafile`                       | Name of the file to download                                        | `nil`             |
-| `initData.objectStorage.provider`         | Name of the provider to download the datafile from                  | `nil`             |
-| `initData.objectStorage.bucket`           | Name of the bucket to download the datafile from                    | `nil`             |
-| `initData.objectStorage.host`             | Name of the host to download the datafile from                      | `nil`             |
-| `initData.objectStorage.secretKeyRefName` | Name of the k8s secret with `access_key_id` and `secret_access_key` | `nil`             |
-| `service.name`                            | Name of the k8s service                                             | `mysql`           |
-| `service.type`                            | Type of the k8s service                                             | `ClusterIP`       |
-| `service.externalPort`                    | External port exposed by the k8s service                            | `3306`            |
-| `service.internalPort`                    | Internal port of the k8s service                                    | `3306`            |
-| `persistence.storageClassName`            | Storage class name of the persistence volume                        | `default`         |
-| `persistence.accessMode`                  | Access mode of the persistence volume                               | `ReadWriteOnce`   |
-| `persistence.size`                        | Internal port of the k8s service                                    | `3306`            |
-| `template.labels`                         | Labels to be added to the MySQL pod                                 | `{}`              |
-| `resources`                               | Resources limits and requests for MySQL                             | `{}`              |
-| `networkPolicy.enabled`                   | Use network policy to filter ingress connections to MySQL           | `false`           |
-| `networkPolicy.allowExternal`             | Allow all ingress connections to MySQL                              | `nil`             |
+| Parameter                                 | Description                                                         | Default                   |
+| ---                                       | ---                                                                 | ---                       |
+| `initData.enabled`                        | Use init container to inject data into MySQL                        | `false`                   |
+| `initData.image`                          | Image and tag used by the init container of data initialization     | `jobteaser/awscli:latest` |
+| `initData.datafile`                       | Name of the file to download                                        | `nil`                     |
+| `initData.objectStorage.bucket`           | Name of the bucket to download the datafile from                    | `nil`                     |
+| `initData.objectStorage.secretKeyRefName` | Name of the k8s secret with `access_key_id` and `secret_access_key` | `nil`                     |
+| `service.name`                            | Name of the k8s service                                             | `mysql`                   |
+| `service.type`                            | Type of the k8s service                                             | `ClusterIP`               |
+| `service.externalPort`                    | External port exposed by the k8s service                            | `3306`                    |
+| `service.internalPort`                    | Internal port of the k8s service                                    | `3306`                    |
+| `persistence.storageClassName`            | Storage class name of the persistence volume                        | `default`                 |
+| `persistence.accessMode`                  | Access mode of the persistence volume                               | `ReadWriteOnce`           |
+| `persistence.size`                        | Internal port of the k8s service                                    | `3306`                    |
+| `template.labels`                         | Labels to be added to the MySQL pod                                 | `{}`                      |
+| `resources`                               | Resources limits and requests for MySQL                             | `{}`                      |
+| `networkPolicy.enabled`                   | Use network policy to filter ingress connections to MySQL           | `false`                   |
+| `networkPolicy.allowExternal`             | Allow all ingress connections to MySQL                              | `nil`                     |
