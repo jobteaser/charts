@@ -7,15 +7,13 @@ image: elasticsearch:2.3
 
 initData:
   enabled: false
-  image: minio/mc:latest
+  image: jobteaser/awscli:latest
   # datafile: my.data.file.path
   # sourceDirectory: mydirectory
   objectStorage: {}
     # To define object storage values, uncomment the following lines, adjust them as
     # necessary, and remove the curly braces after 'objectStorage:'.
-    # provider: s3
     # bucket: mybucket
-    # host: https://<objectStorage-host>:9000
     # We are looking for access-key-id and secret-access-key in this secret.
     # secretKeyRefName: object-storage
 
