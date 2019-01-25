@@ -25,13 +25,6 @@ Initialize data into the elasticsearch indices if it is not present.
   set -ex
   # Exit if data is already persisted
   [[ -d /data/elasticsearch ]] && exit 0
-  # Download datafile from the object storage provider
-  set +ex # Remove logging to avoid credentials leaking
-  mc config host add $OS_PROVIDER $OS_HOST $OS_ACCESS_KEY_ID $OS_SECRET_ACCESS_KEY --api S3v4
-  set -ex
-  mc cp $OS_PROVIDER/$OS_BUCKET/{{ .Values.initData.datafile }} .
-  # Untar elasticsearch data into data persistence volume
-  tar -C /data --strip-components=1 -xvf {{ .Values.initData.datafile }} {{ .Values.initData.sourceDirectory }}
-  # Remove useless archive
-  rm {{ .Values.initData.datafile }}
+  # Download datafile from the object storage provider and untar elasticsearch data from it into data persistence volume
+  aws s3 cp s3://$OS_BUCKET/{{ .Values.initData.datafile }} - | tar -C /data --strip-components=1 -xzvf - {{ .Values.initData.sourceDirectory }}
 {{- end }}

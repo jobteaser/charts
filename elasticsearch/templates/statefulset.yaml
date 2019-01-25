@@ -39,22 +39,18 @@ spec:
       - name: init-data
         image: {{ .Values.initData.image }}
         env:
-        - name: OS_PROVIDER
-          value: {{ .Values.initData.objectStorage.provider | quote }}
         - name: OS_BUCKET
           value: {{ .Values.initData.objectStorage.bucket | quote }}
-        - name: OS_ACCESS_KEY_ID
+        - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               name: {{ .Values.initData.objectStorage.secretKeyRefName }}
               key: access-key-id
-        - name: OS_SECRET_ACCESS_KEY
+        - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               name: {{ .Values.initData.objectStorage.secretKeyRefName }}
               key: secret-access-key
-        - name: OS_HOST
-          value: {{ .Values.initData.objectStorage.host | quote }}
         command:
         {{- include "elasticsearch.initData" . | indent 10 }}
         volumeMounts:
