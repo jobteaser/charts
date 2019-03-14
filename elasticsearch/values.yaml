@@ -16,6 +16,11 @@ initData:
     # bucket: mybucket
     # We are looking for access-key-id and secret-access-key in this secret.
     # secretKeyRefName: object-storage
+  restoreSnapshot:
+    enabled: false
+    sourceDirectory: snapshots
+    repository: backup
+    name: snapshot_1
 
 service:
   type: ClusterIP
