@@ -19,6 +19,10 @@ initData:
     # bucket:
     # We are looking for access-key-id and secret-access-key in this secret.
     # secretKeyRefName:
+  restoreSql:
+    enabled: false
+    # tableName:
+    # sqlfile:
 
 service:
   name: mysql

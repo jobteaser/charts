@@ -44,6 +44,42 @@ spec:
         - name: data
           mountPath: /data
           subPath: mysql
+        {{- if .Values.initData.restoreSql.enabled }}
+        - name: data
+          mountPath: /initdb
+          subPath: initdb
+        {{- end }}
+      {{- if .Values.initData.restoreSql.enabled }}
+      - name: restore-sql
+        image: {{ .Values.image }}
+        command:
+        {{- include "mysql.restoreSql" . | indent 10 }}
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: data
+          mountPath: /initdb
+          subPath: initdb
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRefName }}
+              key: root_password
+        - name: MYSQL_DATABASE
+          value: {{ .Values.database }}
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRefName }}
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretKeyRefName }}
+              key: password
+      {{- end }}
       {{- end }}
       containers:
       - name: mysql
