@@ -57,6 +57,24 @@ spec:
         - name: data
           mountPath: /data
           subPath: elasticsearch
+        {{- if .Values.initData.restoreSnapshot.enabled }}
+        - name: data
+          mountPath: /snapshots
+          subPath: snapshots
+        {{- end }}
+      {{- if .Values.initData.restoreSnapshot.enabled }}
+      - name: restore-snapshot
+        image: {{ .Values.image }}
+        command:
+        {{- include "elasticsearch.restoreSnapshot" . | indent 10 }}
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/elasticsearch/data/elasticsearch
+          subPath: elasticsearch
+        - name: data
+          mountPath: /usr/share/elasticsearch/data/snapshots
+          subPath: snapshots
+      {{- end }}
       {{- end }}
       containers:
       - name: {{ template "elasticsearch.name" . }}
