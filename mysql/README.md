@@ -34,6 +34,9 @@ The following tables lists the configurable parameters of the MySQL chart and th
 | `initData.datafile`                       | Name of the file to download                                        | `nil`                     |
 | `initData.objectStorage.bucket`           | Name of the bucket to download the datafile from                    | `nil`                     |
 | `initData.objectStorage.secretKeyRefName` | Name of the k8s secret with `access_key_id` and `secret_access_key` | `nil`                     |
+| `initData.sqlRestore.enbled`              | Use init container to restore dump into MySQL                       | `false`                   |
+| `initData.sqlRestore.datafile`            | Name of the SQL dump file to download                               | `nil`                     |
+| `initData.sqlRestore.tableName`           | Name of the target table for SQL dump restore                       | `nil`                     |
 | `service.name`                            | Name of the k8s service                                             | `mysql`                   |
 | `service.type`                            | Type of the k8s service                                             | `ClusterIP`               |
 | `service.externalPort`                    | External port exposed by the k8s service                            | `3306`                    |
