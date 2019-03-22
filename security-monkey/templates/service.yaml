@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "security-monkey.fullname" . }}-api
+  labels:
+    app: {{ template "security-monkey.name" . }}
+    chart: {{ template "security-monkey.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.smConfig.apiSvcPort }}
+      targetPort: {{ .Values.smConfig.apiContainerPort }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "security-monkey.name" . }}
+    release: {{ .Release.Name }}
+    component: "api"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "security-monkey.fullname" . }}-nginx
+  labels:
+    app: {{ template "security-monkey.name" . }}
+    chart: {{ template "security-monkey.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.smConfig.nginxSvcPort }}
+      targetPort: {{ .Values.smConfig.nginxContainerPort }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "security-monkey.name" . }}
+    release: {{ .Release.Name }}
+    component: "nginx"
