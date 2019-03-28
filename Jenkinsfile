@@ -1,9 +1,3 @@
-gitProject = "jobteaser/charts"
-final gitRepositoryUrl = "git@github.com:${gitProject}.git"
-final gitTimeout = 60
-
-final gitTargetBranchFilter = '*/' + GIT_TARGET_BRANCH
-
 def label = "jenkins-agent-pod-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label,
@@ -16,27 +10,31 @@ podTemplate(label: label,
 ) {
     node(label) {
         stage('Checkout git source') {
-	    checkout scm
+            checkout scm
+
+            def scmUrl = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
             checkout([
-                $class: 'GitSCM', branches: [[name: gitTargetBranchFilter]],
-                userRemoteConfigs: [[url: gitRepositoryUrl, credentialsId: GIT_CREDENTIAL_ID]],
+                $class: 'GitSCM', branches: [[name: '*/' + GIT_TARGET_BRANCH]],
+                userRemoteConfigs: [[url: scmUrl, credentialsId: GIT_CREDENTIAL_ID]],
                 extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'docs']],
                 gitTool: 'Default'
             ])
         }
         stage('Checking chart updates') {
-            container('k8s-tools') {
-                sh("helm init --client-only")
-            }
-            sh("git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\"")
-            updated_charts = sh(returnStdout: true, script: "git diff --name-only HEAD^ | cut -d/ -f1 | sort -u | grep -v '^docs\$'").trim()
+            updatedDirs = sh(returnStdout: true, script: "git diff --name-only HEAD^^^^^^ | grep / | cut -d/ -f1 | sort -u").trim()
         }
-        if (updated_charts != "") {
+
+        def updatedCharts = updatedDirs.split('\n').toList().findAll { fileExists("${it}/Chart.yaml") && fileExists("${it}/templates") }
+        if (!updatedCharts.isEmpty()) {
             stage('Publishing charts') {
-                updated_charts.split('\n').each {
-		    if (fileExists("${it}/Chart.yaml")) {
+                sh("git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\"")
+                container('k8s-tools') {
+                    sh("helm init --client-only")
+                }
+                updatedCharts.each {
+                    if (fileExists("${it}/Chart.yaml")) {
                         println("Packaging chart ${it}")
-                        container('k8s-tools') {
+                            container('k8s-tools') {
                             sh """
                                 helm package "${it}" -d docs
                                 helm repo index docs --url ${TARGET_URL}
@@ -45,7 +43,7 @@ podTemplate(label: label,
                         dir('docs') {
                             sh("git add . && git commit -m \"Publish chart ${it}\"")
                         }
-		    }
+                    }
                 }
 
                 sshagent([GIT_PUSH_CREDENTIAL_ID]) {
