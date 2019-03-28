@@ -1,0 +1,432 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "security-monkey.fullname" . }}-api
+  labels:
+    app: {{ template "security-monkey.name" . }}-api
+    chart: {{ template "security-monkey.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: "api"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "security-monkey.name" . }}
+      release: {{ .Release.Name }}
+      component: "api"
+  template:
+    metadata:
+      labels:
+        app: {{ template "security-monkey.name" . }}
+        release: {{ .Release.Name }}
+        component: "api"
+    spec:
+      volumes:
+      - name: aws-accounts
+        configMap:
+          name: aws-accounts
+      - name: docker
+        configMap:
+          name: docker
+          defaultMode: 0755
+      - name: app-env-config
+        configMap:
+          name: app-env-config
+          defaultMode: 0755
+      initContainers:
+      - name: {{ .Chart.Name }}-init
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        image: {{ .Values.image.repository }}
+        command: ["/usr/local/src/security_monkey/docker/api-init.sh"]
+        workingDir: /usr/local/src/security_monkey
+        volumeMounts:
+        - name: aws-accounts
+          mountPath: /usr/local/src/security_monkey/data/
+          readOnly: true
+        - name: docker
+          mountPath: /usr/local/src/security_monkey/docker/
+          readOnly: true
+        envFrom:
+        - configMapRef:
+            name: envvars
+        env:
+        - name: SECURITY_MONKEY_POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: security-monkey-secret
+              key: postgresPwd
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: security-monkey-secret
+              key: iamAccessKey
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: security-monkey-secret
+              key: iamSecretKey
+      containers:
+        - name: {{ .Chart.Name }}-api
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}
+          command: ["/usr/local/src/security_monkey/docker/api-start.sh"]
+          workingDir: /usr/local/src/security_monkey
+          volumeMounts:
+          - name: aws-accounts
+            mountPath: /usr/local/src/security_monkey/data/
+            readOnly: true
+          - name: docker
+            mountPath: /usr/local/src/security_monkey/docker/
+            readOnly: true
+          envFrom:
+          - configMapRef:
+              name: envvars
+          env:
+            - name: SECURITY_MONKEY_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: postgresPwd
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: iamAccessKey
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: iamSecretKey
+          readinessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "security-monkey.fullname" . }}-scheduler
+  labels:
+    app: {{ template "security-monkey.name" . }}-scheduler
+    chart: {{ template "security-monkey.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: "scheduler"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "security-monkey.name" . }}
+      release: {{ .Release.Name }}
+      component: "scheduler"
+  template:
+    metadata:
+      labels:
+        app: {{ template "security-monkey.name" . }}
+        release: {{ .Release.Name }}
+        component: "scheduler"
+    spec:
+      volumes:
+      - name: aws-accounts
+        configMap:
+          name: aws-accounts
+      - name: docker
+        configMap:
+          name: docker
+          defaultMode: 0755
+      - name: celery
+        configMap:
+          name: celery
+          defaultMode: 0755
+      - name: github-creds
+        secret:
+          secretName: github
+      containers:
+        - name: {{ .Chart.Name }}-scheduler
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}
+          command: ["/usr/local/src/security_monkey/docker/scheduler-start.sh"]
+          workingDir: /usr/local/src/security_monkey
+          volumeMounts:
+          - name: aws-accounts
+            mountPath: /usr/local/src/security_monkey/data/
+            readOnly: true
+          - name: docker
+            mountPath: /usr/local/src/security_monkey/docker/
+            readOnly: true
+          - name: celery
+            mountPath: /usr/local/src/security_monkey/celeryconfig.py
+            subPath: celeryconfig.py
+            readOnly: true
+          - name: github-creds
+            mountPath: /usr/local/src/security_monkey/github.json
+            subPath: github.json
+            readOnly: true
+          envFrom:
+          - configMapRef:
+              name: envvars
+          env:
+          - name: SECURITY_MONKEY_POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: postgresPwd
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: iamAccessKey
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: iamSecretKey
+          readinessProbe:
+            exec:
+              command:
+              - cat
+              - /usr/local/src/security_monkey/data/aws_accounts.json
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /usr/local/src/security_monkey/data/aws_accounts.json
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "security-monkey.fullname" . }}-worker
+  labels:
+    app: {{ template "security-monkey.name" . }}-worker
+    chart: {{ template "security-monkey.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "security-monkey.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "security-monkey.name" . }}
+        release: {{ .Release.Name }}
+        component: "worker"
+    spec:
+      volumes:
+      - name: aws-accounts
+        configMap:
+          name: aws-accounts
+      - name: docker
+        configMap:
+          name: docker
+          defaultMode: 0755
+      - name: celery
+        configMap:
+          name: celery
+          defaultMode: 0755
+      - name: github-creds
+        secret:
+          secretName: github
+      containers:
+        - name: {{ .Chart.Name }}-worker
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}
+          command: ["/usr/local/src/security_monkey/docker/worker-start.sh"]
+          workingDir: /usr/local/src/security_monkey
+          volumeMounts:
+          - name: aws-accounts
+            mountPath: /usr/local/src/security_monkey/data/
+            readOnly: true
+          - name: docker
+            mountPath: /usr/local/src/security_monkey/docker/
+            readOnly: true
+          - name: celery
+            mountPath: /usr/local/src/security_monkey/celeryconfig.py
+            subPath: celeryconfig.py
+            readOnly: true
+          - name: github-creds
+            mountPath: /usr/local/src/security_monkey/github.json
+            subPath: github.json
+            readOnly: true
+          envFrom:
+          - configMapRef:
+              name: envvars
+          env:
+          - name: SECURITY_MONKEY_POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: postgresPwd
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: iamAccessKey
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: iamSecretKey
+          readinessProbe:
+            exec:
+              command:
+              - cat
+              - /usr/local/src/security_monkey/data/aws_accounts.json
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /usr/local/src/security_monkey/data/aws_accounts.json
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "security-monkey.fullname" . }}-nginx
+  labels:
+    app: {{ template "security-monkey.name" . }}-nginx
+    chart: {{ template "security-monkey.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: "nginx"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "security-monkey.name" . }}
+      release: {{ .Release.Name }}
+      component: "nginx"
+  template:
+    metadata:
+      labels:
+        app: {{ template "security-monkey.name" . }}
+        release: {{ .Release.Name }}
+        component: "nginx"
+    spec:
+      volumes:
+      - name: aws-accounts
+        configMap:
+          name: aws-accounts
+      - name: docker
+        configMap:
+          name: docker
+          defaultMode: 0755
+      - name: nginx-host-conf
+        configMap:
+          name: nginx-host-conf
+          defaultMode: 0755
+      containers:
+        - name: {{ .Chart.Name }}-nginx
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.nginxRepository }}
+          command: ["/usr/local/src/security_monkey/docker/nginx-start.sh"]
+          workingDir: /usr/local/src/security_monkey
+          volumeMounts:
+          - name: aws-accounts
+            mountPath: /usr/local/src/security_monkey/data/
+            readOnly: true
+          - name: docker
+            mountPath: /usr/local/src/security_monkey/docker/
+            readOnly: true
+          - name: nginx-host-conf
+            mountPath: /etc/nginx/conf.d/
+            readOnly: true
+          envFrom:
+          - configMapRef:
+              name: envvars
+          env:
+            - name: SECURITY_MONKEY_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: postgresPwd
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: iamAccessKey
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: iamSecretKey
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.smConfig.nginxContainerPort }}
+            initialDelaySeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.smConfig.nginxContainerPort }}
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

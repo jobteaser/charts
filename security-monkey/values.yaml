@@ -1,0 +1,69 @@
+# Default values for security-monkey.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ""
+  nginxRepository: ""
+  tag: stable
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+     kubernetes.io/ingress.class: nginx
+     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+     certmanager.k8s.io/acme-challenge-type: http01
+  path: /
+  hosts: []
+  tls:
+    - secretName: security-monkey-tls
+      hosts: []
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+smConfig:
+  dbHost: ""
+  dbUser: ""
+  mainDbName: ""
+  secmonDbName: "" # Should be different from the postgres default database name, if not, init script may not work as expected.
+  redisHost: ""
+  redisDb: 0
+  adminTeamEmail: ""
+  awsSesRegion: ""
+  emailUseSMTP: "False"
+  workersReplicaCount: 1
+  apiSvcPort: 5000
+  apiContainerPort: 5000
+  nginxSvcPort: 80
+  nginxContainerPort: 80
+  # A list of your AWS accounts, with, for each one of them the following keys:
+  # accountName, accountNumber, iamRole and canonicalId
+  # example:
+  # accountName: my-account-alias
+  # accountNumber: "123456789007"
+  # iamRole: iam.role.for.security.monkey.to.assume.on.the.account
+  # canonicalId: sdjchjh243hbsv767435dskvhbksbdv # you can retrieve it with aws s3api list-buckets
+  aws_accounts: []
