@@ -34,16 +34,18 @@ podTemplate(label: label,
         if (updated_charts != "") {
             stage('Publishing charts') {
                 updated_charts.split('\n').each {
-                    println("Packaging chart ${it}")
-                    container('k8s-tools') {
-                        sh """
-                            helm package "${it}" -d docs
-                            helm repo index docs --url ${TARGET_URL}
-                        """
-                    }
-                    dir('docs') {
-                        sh("git add . && git commit -m \"Publish chart ${it}\"")
-                    }
+		    if (fileExists("${it}/Chart.yaml")) {
+                        println("Packaging chart ${it}")
+                        container('k8s-tools') {
+                            sh """
+                                helm package "${it}" -d docs
+                                helm repo index docs --url ${TARGET_URL}
+                            """
+                        }
+                        dir('docs') {
+                            sh("git add . && git commit -m \"Publish chart ${it}\"")
+                        }
+		    }
                 }
 
                 sshagent([GIT_PUSH_CREDENTIAL_ID]) {
