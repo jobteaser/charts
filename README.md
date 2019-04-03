@@ -10,9 +10,7 @@ helm create mychart
 ```
 
 ### Publish
-```
-bin/publish
-```
+Publishing is done by a continuous deployment pipeline triggered by a merge on master.
 
 ### Install repo into helm
 
