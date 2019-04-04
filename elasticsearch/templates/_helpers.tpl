@@ -56,10 +56,11 @@ Initialize data into the elasticsearch indices if it is not present.
 
   echo Restoring snasphot...
   curl -XPOST "localhost:9200/_all/_close?allow_no_indices=true&expand_wildcards=all&wait_for_completion=true"
-  curl -XPUT "localhost:9200/_snapshot/{{ .Values.initData.restoreSnapshot.repository }}" -d '{"type": "fs", "settings": {"compress": "true", "location": "/usr/share/elasticsearch/data/snapshots"}}}'
+  curl -XPUT "localhost:9200/_snapshot/{{ .Values.initData.restoreSnapshot.repository }}" -d '{"type": "fs", "settings": {"compress": "true", "location": "/usr/share/elasticsearch/data/snapshots"}}'
   curl -XPOST "localhost:9200/_snapshot/{{ .Values.initData.restoreSnapshot.repository }}/{{ .Values.initData.restoreSnapshot.name }}/_restore?wait_for_completion=true"
   curl -XPOST "localhost:9200/_all/_open?allow_no_indices=true&expand_wildcards=all&wait_for_completion=true"
-  curl -XDELETE localhost:9200/_snapshot/{{ .Values.initData.restoreSnapshot.repository }}/{{ .Values.initData.restoreSnapshot.name }}
+  curl -XDELETE "localhost:9200/_snapshot/{{ .Values.initData.restoreSnapshot.repository }}/{{ .Values.initData.restoreSnapshot.name }}?wait_for_completion=true"
+  curl -XDELETE "localhost:9200/_snapshot/{{ .Values.initData.restoreSnapshot.repository }}?wait_for_completion=true"
   kill -15 $(cat /run/elasticsearch/es.pid)
 
   echo Restore successful, removing snapshot.
