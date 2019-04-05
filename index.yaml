@@ -3,7 +3,7 @@ entries:
   ci-connector:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.753163375Z
+    created: 2019-04-05T20:17:16.654012791Z
     description: ci-connector chart
     digest: aa0377e1fe2336630a426d5f7a4fc7873c9c25e4ad762a16d1f983bb7391a5cc
     name: ci-connector
@@ -13,7 +13,7 @@ entries:
   csp-handler:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.753929174Z
+    created: 2019-04-05T20:17:16.655182135Z
     description: A Helm chart for Kubernetes
     digest: ae6b470fd09a57637a5e02a1f16ede01c084474c27357ecb96592d9dcd633121
     name: csp-handler
@@ -22,7 +22,7 @@ entries:
     version: 0.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.753681898Z
+    created: 2019-04-05T20:17:16.654806943Z
     description: A Helm chart for Kubernetes
     digest: 0699733cb0ba380ca035c67935cab7eefa9a6c4779eae0f314e08e260802bda3
     name: csp-handler
@@ -31,7 +31,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.753424631Z
+    created: 2019-04-05T20:17:16.654402583Z
     description: A Helm chart for Kubernetes
     digest: 984e15b00a645ffae713a922151e3c1b05f4ade2cb6e12b0ceb33887682174d9
     name: csp-handler
@@ -41,7 +41,7 @@ entries:
   datadog:
   - apiVersion: v1
     appVersion: latest
-    created: 2019-04-05T20:16:15.754579447Z
+    created: 2019-04-05T20:17:16.656183664Z
     description: Datadog agent chart
     digest: 5abbb3f6b5ccbd159376d9dd6b9239342c1f1e486f47d199c259b2d96a430857
     name: datadog
@@ -50,7 +50,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: latest
-    created: 2019-04-05T20:16:15.754352657Z
+    created: 2019-04-05T20:17:16.655845992Z
     description: Datadog agent chart
     digest: ff54dceff3a9827e9c691b719804d5118e7a3ad67a7cdfbcd56d39d27ab2c9ac
     name: datadog
@@ -59,7 +59,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.75413329Z
+    created: 2019-04-05T20:17:16.655543783Z
     description: Datadog agent chart
     digest: 1a8bb890cc90ee4520d667f49c3a4d774141f9f4295b78bad866ad2797451f6f
     name: datadog
@@ -68,15 +68,15 @@ entries:
     version: 0.1.0
   elasticsearch:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.758511879Z
+    created: 2019-04-05T20:17:16.662583048Z
     description: A Helm chart for Elasticsearch
-    digest: 3b4a8b4f1f7dbdaef10d8d325c0824d29c6c96612170bf8c5907be4ea9c46e55
+    digest: 07cebf7e382419dd06ec8fa1573836fa31eb678da3094d099df5fdc8e561cce1
     name: elasticsearch
     urls:
     - https://jobteaser.github.com/charts/elasticsearch-2.1.1.tgz
     version: 2.1.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.758234579Z
+    created: 2019-04-05T20:17:16.661714085Z
     description: A Helm chart for Elasticsearch
     digest: 67e381f224ce31278f56ed8f95bf30052ce912cd63ad71c951e61d551561582f
     name: elasticsearch
@@ -84,7 +84,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.757950718Z
+    created: 2019-04-05T20:17:16.66123587Z
     description: A Helm chart for Elasticsearch
     digest: 1fc0d3b09d7ed171eb9ce73fcc3d00813b461af7024f525c064a05768263d78e
     name: elasticsearch
@@ -92,7 +92,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-2.0.3.tgz
     version: 2.0.3
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.757707383Z
+    created: 2019-04-05T20:17:16.660857959Z
     description: A Helm chart for Elasticsearch
     digest: c1c7704c370e9869dffe16f7f9efcb8b08216612a2964fe3ef24a86f975c23bc
     name: elasticsearch
@@ -100,7 +100,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-2.0.2.tgz
     version: 2.0.2
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.757428511Z
+    created: 2019-04-05T20:17:16.660450407Z
     description: A Helm chart for Elasticsearch
     digest: adaa91a475c3f4a86bb7d03b6721a0047b909348607c773c8457d518f10a6f29
     name: elasticsearch
@@ -108,7 +108,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.757185679Z
+    created: 2019-04-05T20:17:16.66006001Z
     description: A Helm chart for Elasticsearch
     digest: 3ef84d486e2b105c38c5c2b43d5564bb7aaf056769a5b35ad3199d8773a5e87e
     name: elasticsearch
@@ -116,7 +116,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-2.0.0.tgz
     version: 2.0.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.756929062Z
+    created: 2019-04-05T20:17:16.659674307Z
     description: A Helm chart for Elasticsearch
     digest: 5c634f66522d0a173ed2657a11403643baf4c1cde90dbb0f8862e8d93e32962e
     name: elasticsearch
@@ -124,7 +124,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-1.0.4.tgz
     version: 1.0.4
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.756683733Z
+    created: 2019-04-05T20:17:16.659255099Z
     description: A Helm chart for Elasticsearch
     digest: c67eeed6ff28d430f448c4ba95700ef9f22c3b4d6dc007bf8a338cc2944164f7
     name: elasticsearch
@@ -132,7 +132,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-1.0.3.tgz
     version: 1.0.3
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.756387087Z
+    created: 2019-04-05T20:17:16.658815162Z
     description: A Helm chart for Elasticsearch
     digest: 82eac43b4ed63e4d7193412595d51c359e3e51f0885572c6519fc67b34656f6a
     name: elasticsearch
@@ -140,7 +140,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.756140069Z
+    created: 2019-04-05T20:17:16.658433378Z
     description: A Helm chart for Elasticsearch
     digest: 7f80ac94ae4fcb6178a76b73e7dd10d0d2cd2cb1f8cbe286943a5f77e74aaf22
     name: elasticsearch
@@ -148,7 +148,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.755881815Z
+    created: 2019-04-05T20:17:16.65802846Z
     description: A Helm chart for Elasticsearch
     digest: 471bb4694963d145121896447a209a5e5f612c71ffe3a4d1c89614ac3ee6009b
     name: elasticsearch
@@ -156,7 +156,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.755641889Z
+    created: 2019-04-05T20:17:16.657710165Z
     description: A Helm chart for Elasticsearch
     digest: 3d46ce14ab3cf2ce0dc19972bec41b8295b7f6d6e87b3e93d7a647ef0f6caca9
     name: elasticsearch
@@ -164,7 +164,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.755393426Z
+    created: 2019-04-05T20:17:16.657411892Z
     description: A Helm chart for Elasticsearch
     digest: 22a9e6cfa7073b03eb9927ed5abcd471e69f2701024deba67ef7f9f9b407c779
     name: elasticsearch
@@ -172,7 +172,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.755200467Z
+    created: 2019-04-05T20:17:16.657108776Z
     description: A Helm chart for Elasticsearch
     digest: 5967e79daee8bc3ea4af95ed726ebe3557f76cb01c5bccf79cc6fe82ec2e2ddf
     name: elasticsearch
@@ -180,7 +180,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.754979527Z
+    created: 2019-04-05T20:17:16.656793725Z
     description: A Helm chart for Elasticsearch
     digest: 277a9ad3b203787bcc9e4cb710a343fc9f9f8ac59d1c5d38823a2ac6b8c0a2fc
     name: elasticsearch
@@ -188,7 +188,7 @@ entries:
     - https://jobteaser.github.com/charts/elasticsearch-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.754781269Z
+    created: 2019-04-05T20:17:16.656490275Z
     description: A Helm chart for Elasticsearch
     digest: 2fa7fb1be32e88b5a1e3dde07efb86a6d9ad7b7c7eaa5bdb7c705d1bdec008db
     name: elasticsearch
@@ -197,7 +197,7 @@ entries:
     version: 0.1.0
   jenkins:
   - appVersion: 2.121.1
-    created: 2019-04-05T20:16:15.759805397Z
+    created: 2019-04-05T20:17:16.663746658Z
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -218,7 +218,7 @@ entries:
     version: 0.16.6
   jtpostgres:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.760663478Z
+    created: 2019-04-05T20:17:16.66406363Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: 791350c088150f26325b8b4db8b0f6b2e21dd5583238adb4e1d14b19dea6f73e
@@ -234,7 +234,7 @@ entries:
     version: 0.1.0
   kubectl-oidc-helper:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.761823476Z
+    created: 2019-04-05T20:17:16.665001755Z
     description: A Helm chart for oidc-helper
     digest: eda7eb77277f10d7b7d1ed364652ace768147fddf130d471d05cf6bf40c92db2
     name: kubectl-oidc-helper
@@ -242,7 +242,7 @@ entries:
     - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.761576564Z
+    created: 2019-04-05T20:17:16.664754182Z
     description: A Helm chart for oidc-helper
     digest: dce54ef3063bbaeb33707a10e4a18d52547b84154b3f69746cd4407a3a5cff61
     name: kubectl-oidc-helper
@@ -250,7 +250,7 @@ entries:
     - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.761302553Z
+    created: 2019-04-05T20:17:16.664505406Z
     description: A Helm chart for oidc-helper
     digest: 5befa2b8d584836286e69be39fcbc19477daf994641a8fcef32135c94ec008b7
     name: kubectl-oidc-helper
@@ -258,7 +258,7 @@ entries:
     - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.761053798Z
+    created: 2019-04-05T20:17:16.664280466Z
     description: A Helm chart for oidc-helper
     digest: 41a6e0fb9bd2180006d5db955dc11fe687d2a92bf9dc7d58796ca4b54fe3550b
     name: kubectl-oidc-helper
@@ -268,7 +268,7 @@ entries:
   kubernetes-filebeat:
   - apiVersion: v1
     appVersion: 6.2.1
-    created: 2019-04-05T20:16:15.762710766Z
+    created: 2019-04-05T20:17:16.665883649Z
     description: Filebeat log collector
     digest: f17cc775e5cf4e635ebf88599e0f0d1570fdf4acbf0bdb6f0faaddea975dddfc
     name: kubernetes-filebeat
@@ -277,7 +277,7 @@ entries:
     version: 0.2.1
   - apiVersion: v1
     appVersion: 6.2.1
-    created: 2019-04-05T20:16:15.762485248Z
+    created: 2019-04-05T20:17:16.665662147Z
     description: Filebeat log collector
     digest: 4b0588e9213850eb2fe45eabdd6353b7bd0405dc0e462ac4f9dc782b4909a073
     name: kubernetes-filebeat
@@ -286,7 +286,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.76226424Z
+    created: 2019-04-05T20:17:16.665434332Z
     description: Filebeat log collector
     digest: 5c1011f4cce7bedd1bd6689650ad242b87b187a210c1db16ada4a2160ff045b0
     name: kubernetes-filebeat
@@ -295,7 +295,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-05T20:16:15.762020908Z
+    created: 2019-04-05T20:17:16.66520126Z
     description: Filebeat log collector
     digest: d1001519d4ff9c922472e11e079b157379d0561f553cdd3c571e25f2c2db1aff
     name: kubernetes-filebeat
@@ -304,7 +304,7 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.764784402Z
+    created: 2019-04-05T20:17:16.667894411Z
     description: A Helm chart for MySQL
     digest: b656b7cae8e038c7ee149808d6a451c09fb4e2cd0f07473616b81d78821308db
     name: mysql
@@ -312,7 +312,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.764505708Z
+    created: 2019-04-05T20:17:16.667630431Z
     description: A Helm chart for MySQL
     digest: 946cd58dabff76d898771609e5fcdad5586d661cd6cf9e6ce54176b87a323eb3
     name: mysql
@@ -320,7 +320,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-1.0.3.tgz
     version: 1.0.3
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.76426584Z
+    created: 2019-04-05T20:17:16.667366486Z
     description: A Helm chart for MySQL
     digest: f7502ebc46d835bc291bc99f8600e319f6bcec3a010204da939b9f2a758b18b5
     name: mysql
@@ -328,7 +328,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.76400851Z
+    created: 2019-04-05T20:17:16.667127333Z
     description: A Helm chart for MySQL
     digest: a94385aab3af4a7a904265702a9ae4d278c32cf81ca0da72562d926074c39c21
     name: mysql
@@ -336,7 +336,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.763753873Z
+    created: 2019-04-05T20:17:16.666879403Z
     description: A Helm chart for MySQL
     digest: 99cc7a80d0cc674361470f2dfd67db2005afee82a09d129e32e51da677a9325e
     name: mysql
@@ -344,7 +344,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.763496967Z
+    created: 2019-04-05T20:17:16.666638215Z
     description: A Helm chart for MySQL
     digest: c1c4b393f613ac5b755ce2bcf8656b74c327275db1fca7aae603bf89a5727c23
     name: mysql
@@ -352,7 +352,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.763266462Z
+    created: 2019-04-05T20:17:16.666444673Z
     description: A Helm chart for MySQL
     digest: e918062b2f21a6ff200bbbfb18224af0a87968390fa871c6cb816c021603ffde
     name: mysql
@@ -360,7 +360,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.763087924Z
+    created: 2019-04-05T20:17:16.666235933Z
     description: A Helm chart for MySQL
     digest: 73e8674411bc8aa779ebb609329a3e22ec5767b1644ccdab276b323015cc5bea
     name: mysql
@@ -368,7 +368,7 @@ entries:
     - https://jobteaser.github.com/charts/mysql-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.762888513Z
+    created: 2019-04-05T20:17:16.666059686Z
     description: A Helm chart for MySQL
     digest: e6557eb05e5c351181887a8e5683f0a706df2c893ddf3229f5619493db698556
     name: mysql
@@ -377,7 +377,7 @@ entries:
     version: 0.1.0
   oidc-proxy:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.764984551Z
+    created: 2019-04-05T20:17:16.668084275Z
     description: A Helm chart for Kubernetes
     digest: 993697d90487767a0523902a116437f9e5064cb91b024475f24286162be67409
     name: oidc-proxy
@@ -386,7 +386,7 @@ entries:
     version: 0.1.0
   postgres:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.767107915Z
+    created: 2019-04-05T20:17:16.670363632Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: c2046713d1647934039f782fb5a69256695f3e1bd65505e289088ae43e9f1748
@@ -401,7 +401,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.5.2.tgz
     version: 0.5.2
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.766798377Z
+    created: 2019-04-05T20:17:16.670031364Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: 4f02a2736096ea89a78aa38274dbd33fa49360631adb0f642e972f8eea453ad1
@@ -416,7 +416,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.5.1.tgz
     version: 0.5.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.766475519Z
+    created: 2019-04-05T20:17:16.669701195Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: aa345d521e008764fbd6b849ab8c23c64ad79bf70224a3ec68bb4cd6c77b8926
@@ -431,7 +431,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.766170443Z
+    created: 2019-04-05T20:17:16.669372967Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: a7d126642e45789df79d5fffd6deeb560fe44cdaff19b684b93a945f307eedba
@@ -446,7 +446,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.765863524Z
+    created: 2019-04-05T20:17:16.669035139Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: dafb9c9d3f86c1a73621813614ed3fd51de8cfc688be72f8a4fec6185f4aa68b
@@ -461,7 +461,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.765556966Z
+    created: 2019-04-05T20:17:16.668696937Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: 094764fccf6bb2291dc5ee7dc8adb208b85a50d75d048d1f68fd0c04bc827e6c
@@ -476,7 +476,7 @@ entries:
     - https://jobteaser.github.com/charts/postgres-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.765272938Z
+    created: 2019-04-05T20:17:16.668373909Z
     description: Object-relational database management system (ORDBMS) with an emphasis
       on extensibility and on standards-compliance.
     digest: 76cc8dccb0dc593966112b39f37b4ad4435ba7dc5a03da68a6efa6d17108b868
@@ -492,7 +492,7 @@ entries:
     version: 0.1.0
   redis:
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.769143395Z
+    created: 2019-04-05T20:17:16.672491488Z
     description: A High Availability Redis Cluster with Redis Sentinel and Kubernetes
       StatefulSet
     digest: 68f89bc18734cedf1c4e8adc05c342fef6c36e76dd06b63c54e6c3bf07954f9a
@@ -501,7 +501,7 @@ entries:
     - https://jobteaser.github.com/charts/redis-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.768854789Z
+    created: 2019-04-05T20:17:16.672208375Z
     description: A High Availability Redis Cluster with Redis Sentinel and Kubernetes
       StatefulSet
     digest: c95775852665d15dc6420d729b4bc31094f8aefa003aabd5256ac34adcc598aa
@@ -510,7 +510,7 @@ entries:
     - https://jobteaser.github.com/charts/redis-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.768239857Z
+    created: 2019-04-05T20:17:16.671862243Z
     description: A Redis Cluster with Sentinel StatefulSet
     digest: 9669ead620638b07eec60d3b59716a18fb7f3dbd55b4f9ca8436ff00e35c9d17
     name: redis
@@ -518,7 +518,7 @@ entries:
     - https://jobteaser.github.com/charts/redis-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.767709093Z
+    created: 2019-04-05T20:17:16.671272853Z
     description: A Redis Cluster with Sentinel StatefulSet
     digest: 23badec44cb765fc00d0658d797369387fbc16055aa8d8ada253890ebb7f59ca
     name: redis
@@ -526,7 +526,7 @@ entries:
     - https://jobteaser.github.com/charts/redis-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.767503759Z
+    created: 2019-04-05T20:17:16.67073922Z
     description: A Redis Cluster with Sentinel StatefulSet
     digest: 511ce6a5c2f3f92561356cad2398c8e6c6b520586c9610a909a48ccea6b3240a
     name: redis
@@ -534,11 +534,11 @@ entries:
     - https://jobteaser.github.com/charts/redis-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2019-04-05T20:16:15.767281198Z
+    created: 2019-04-05T20:17:16.670546149Z
     description: A Redis Cluster with Sentinel StatefulSet
     digest: aeab5b974c5d030308ba720eae58f8003e1d341dc31de3f8435450a3f2e25d16
     name: redis
     urls:
     - https://jobteaser.github.com/charts/redis-0.1.0.tgz
     version: 0.1.0
-generated: 2019-04-05T20:16:15.752778131Z
+generated: 2019-04-05T20:17:16.653384332Z
