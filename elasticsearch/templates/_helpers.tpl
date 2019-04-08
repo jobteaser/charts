@@ -24,7 +24,7 @@ Initialize data into the elasticsearch indices if it is not present.
 - |
   set -ex
   # Exit if data is already persisted
-  [[ -d /data/elasticsearch ]] && exit 0
+  ls /data/* >/dev/null 2>&1 && exit 0
   # Download datafile from the object storage provider and untar elasticsearch data from it into data persistence volume
 {{- if .Values.initData.restoreSnapshot.enabled }}
   aws s3 cp s3://$OS_BUCKET/{{ .Values.initData.datafile }} - | tar -C /snapshots --strip-components=1 -xzvf - {{ .Values.initData.restoreSnapshot.sourceDirectory }}
@@ -43,8 +43,8 @@ Initialize data into the elasticsearch indices if it is not present.
 - |
   set -ex
   # Exit if no snapshot is present
-  [ -d /usr/share/elasticsearch/data/snapshots ] || exit 0
-  # Download datafile from the object storage provider and untar elasticsearch data from it into data persistence volume
+  ls /usr/share/elasticsearch/data/snapshots/* >/dev/null 2>&1 || exit 0
+  # untar elasticsearch data from datafile into data persistence volume
   /docker-entrypoint.sh elasticsearch -p /run/elasticsearch/es.pid -d --path.repo=/usr/share/elasticsearch/data/snapshots
   echo Waiting for ES to be up...
   while ! curl >/dev/null 2>&1 localhost:9200; do
