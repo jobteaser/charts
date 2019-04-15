@@ -17,8 +17,6 @@ filebeat.autodiscover:
   providers:
 
   - type: kubernetes
-    labels.dedot: true
-    annotations.dedot: true
 
     include_annotations:
     - log/format
