@@ -66,6 +66,11 @@ spec:
             secretKeyRef:
               name: security-monkey-secret
               key: iamSecretKey
+        - name: SECURITY_MONKEY_EMAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: security-monkey-secret
+              key: emailSMTPPassword
       containers:
         - name: {{ .Chart.Name }}-api
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -98,6 +103,11 @@ spec:
                 secretKeyRef:
                   name: security-monkey-secret
                   key: iamSecretKey
+             - name: SECURITY_MONKEY_EMAIL_PASSWORD
+               valueFrom:
+                 secretKeyRef:
+                   name: security-monkey-secret
+                   key: emailSMTPPassword
           readinessProbe:
             tcpSocket:
               port: 5000
@@ -201,6 +211,11 @@ spec:
               secretKeyRef:
                 name: security-monkey-secret
                 key: iamSecretKey
+          - name: SECURITY_MONKEY_EMAIL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: emailSMTPPassword
           readinessProbe:
             exec:
               command:
@@ -307,6 +322,11 @@ spec:
               secretKeyRef:
                 name: security-monkey-secret
                 key: iamSecretKey
+          - name: SECURITY_MONKEY_EMAIL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: security-monkey-secret
+                key: emailSMTPPassword
           readinessProbe:
             exec:
               command:
@@ -407,6 +427,11 @@ spec:
                 secretKeyRef:
                   name: security-monkey-secret
                   key: iamSecretKey
+            - name: SECURITY_MONKEY_EMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: emailSMTPPassword
           readinessProbe:
             tcpSocket:
               port: {{ .Values.smConfig.nginxContainerPort }}

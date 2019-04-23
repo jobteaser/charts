@@ -53,7 +53,8 @@ smConfig:
   redisDb: 0
   adminTeamEmail: ""
   awsSesRegion: ""
-  emailUseSMTP: "False"
+  emailUseSMTP: "True"
+  emailSMTPUser: ""
   workersReplicaCount: 1
   apiSvcPort: 5000
   apiContainerPort: 5000
@@ -67,3 +68,25 @@ smConfig:
   # iamRole: iam.role.for.security.monkey.to.assume.on.the.account
   # canonicalId: sdjchjh243hbsv767435dskvhbksbdv # you can retrieve it with aws s3api list-buckets
   aws_accounts: []
+
+
+#### You need to create a secret like the following:
+#  apiVersion: v1
+#  kind: Secret
+#  metadata:
+#    name: security-monkey-secret
+#  stringData:
+#    postgresPwd: your-pgsql-pw
+#    iamAccessKey: your-iam-access
+#    iamSecretKey: your-iam-secret
+#    emailSMTPPassword: your-smtp-passoword
+#    ghAccessToken: your-gh-token
+#  ---
+#  apiVersion: v1
+#  data:
+#    github.json: your-github-token
+#  kind: Secret
+#  metadata:
+#    name: github
+#    namespace: security-monkey
+#  type: Opaque

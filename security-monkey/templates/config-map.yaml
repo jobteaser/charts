@@ -21,6 +21,7 @@ data:
   SECURITY_MONKEY_EMAIL_DEFAULT_SENDER: "{{ .Values.smConfig.adminTeamEmail }}"
   SECURITY_MONKEY_SMTP: "{{ .Values.smConfig.emailUseSMTP }}"
   SECURITY_MONKEY_SES_REGION: "{{ .Values.smConfig.awsSesRegion }}"
+  SECURITY_MONKEY_EMAIL_USERNAME: "{{ .Values.smConfig.emailSMTPUsername }}"
 
   # SSO
   #SECURITY_MONKEY_ACTIVE_PROVIDERS: "google"
@@ -467,7 +468,7 @@ data:
             'file': {
                 # 'class': 'logging.handlers.RotatingFileHandler',
                 'class': 'logging.handlers.GroupWriteRotatingFileHandler',
-                'level': 'DEBUG',
+                'level': 'INFO',
                 'formatter': 'standard',
                 'filename': '/var/log/security_monkey/securitymonkey.log',
                 'maxBytes': 10485760,
@@ -476,7 +477,7 @@ data:
             },
             'console': {
                 'class': 'logging.StreamHandler',
-                'level': 'DEBUG',
+                'level': 'INFO',
                 'formatter': 'standard',
                 'stream': 'ext://sys.stdout'
             }
@@ -484,7 +485,7 @@ data:
         'loggers': {
             'security_monkey': {
                 'handlers': ['console'],
-                'level': os.getenv('SM_CONSOLE_LOG_LEVEL', 'DEBUG')
+                'level': os.getenv('SM_CONSOLE_LOG_LEVEL', 'INFO')
             },
             'apscheduler': {
                 'handlers': ['console'],
