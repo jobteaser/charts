@@ -103,11 +103,11 @@ spec:
                 secretKeyRef:
                   name: security-monkey-secret
                   key: iamSecretKey
-             - name: SECURITY_MONKEY_EMAIL_PASSWORD
-               valueFrom:
-                 secretKeyRef:
-                   name: security-monkey-secret
-                   key: emailSMTPPassword
+            - name: SECURITY_MONKEY_EMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: security-monkey-secret
+                  key: emailSMTPPassword
           readinessProbe:
             tcpSocket:
               port: 5000
