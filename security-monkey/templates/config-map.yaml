@@ -20,6 +20,7 @@ data:
   SECURITY_MONKEY_SECURITY_TEAM_EMAIL: "{{ .Values.smConfig.adminTeamEmail }}"
   SECURITY_MONKEY_EMAIL_DEFAULT_SENDER: "{{ .Values.smConfig.adminTeamEmail }}"
   SECURITY_MONKEY_SMTP: "{{ .Values.smConfig.emailUseSMTP }}"
+  SECURITY_MONKEY_EMAIL_SERVER: "{{ .Values.smConfig.emailSMTPServer }}"
   SECURITY_MONKEY_SES_REGION: "{{ .Values.smConfig.awsSesRegion }}"
 
   # SSO

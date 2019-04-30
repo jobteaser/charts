@@ -52,8 +52,9 @@ smConfig:
   redisHost: ""
   redisDb: 0
   adminTeamEmail: ""
-  awsSesRegion: ""
+  awsSesRegion: "eu-west-1"
   emailUseSMTP: "False"
+  emailSMTPServer: "email-smtp.eu-west-1.amazonaws.com"
   workersReplicaCount: 1
   apiSvcPort: 5000
   apiContainerPort: 5000
