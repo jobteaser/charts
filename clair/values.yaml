@@ -5,8 +5,8 @@ replicaCount: 1
 logLevel: info
 insecureTls: false
 image:
-  repository: quay.io/coreos/clair-git
-  tag: latest
+  repository: quay.io/coreos/clair
+  tag: v2.0.8
   pullPolicy: Always
 service:
   type: NodePort
@@ -20,8 +20,8 @@ ingress:
   hosts:
     - chart-example.local
   annotations:
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: ingress
+    certmanager.k8s.io/issuer: "letsencrypt-prod"
   tls:
     # Secrets must be manually created in the namespace.
     # - secretName: chart-example-tls
@@ -35,16 +35,30 @@ resources:
     cpu: 100m
     memory: 500Mi
 config:
+  # Clair docs: https://github.com/coreos/clair/tree/master/Documentation
   # postgresURI: "postgres://user:password@host:5432/postgres?sslmode=disable"
-  paginationKey: "XxoPtCUzrUv4JV5dS+yQ+MdW7yLEJnRMwigVY/bpgtQ="
+
+  # 32-bit URL-safe base64 key used to encrypt pagination tokens.
+  # If one is not provided, it will be generated.
+  # Multiple clair instances in the same cluster need the same value.
+  paginationKey: ""
+  # Frequency the database will be updated with vulnerabilities from the default data sources
+  # The value 0 disables the updater entirely.
   updateInterval: 2h
-  notificationWebhookEndpoint: https://example.com/notify/me
+  # Optional endpoint that will receive notifications via POST requests.
+  notificationWebhookEndpoint: ""
+  # Clair will download CVE information for these operating systems.
   enabledUpdaters:
   - debian
   - ubuntu
   - rhel
   - oracle
   - alpine
+  - suse
+  # Feature - anything that when present in a filesystem could be an indication of a vulnerability
+  #   (e.g. the presence of a file or an installed software package)
+  # Feature Namespace (featurens) - a context around features and vulnerabilities (e.g. an operating
+  #   system or a programming language). Namespace is the contextual information around features.
   enabledNamespaceDetectors:
   - os-release
   - lsb-release
@@ -58,19 +72,28 @@ config:
 nodeSelector: {}
 tolerations: []
 
-# Configuration values for the postgresql dependency.
+# Configuration values for the postgres dependency.
 # ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
-postgresql:
+postgres:
 # The dependant Postgres chart can be disabled, to connect to
 # an existing database by defining config.postgresURI
   enabled: true
 
-  imageTag: 9.6-alpine
+  imageTag: postgres:9.6
 
-  cpu: 1000m
-  memory: 1Gi
-# These values are hardcoded until Helm supports secrets.
-# For more info see: https://github.com/kubernetes/helm/issues/2196
+  resources:
+    requests:
+      memory: 1024Mi
+      cpu: 1000m
+
+  # Use secret store to set postgres user password
+  # secretName: # default to {{ .Release.Name }}-secret
+  secret:
+    enabled: false
+
+  # These values are hardcoded until Helm supports secrets.
+  # For more info see: https://github.com/kubernetes/helm/issues/2196
+  # TODO pass the database credetials as secrets
   postgresUser: clair
   postgresPassword: clair
   postgresDatabase: clair

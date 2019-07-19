@@ -25,9 +25,9 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
-Create a default fully qualified postgresql name.
+Create a default fully qualified postgres name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "postgresql.fullname" -}}
-{{- printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" -}}
+{{- define "postgres.fullname" -}}
+{{- printf "%s-%s" .Release.Name "postgres" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
