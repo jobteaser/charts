@@ -2,25 +2,30 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ .Release.Name }}
+  app.kubernetes.io/name: {{ template "clair.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: tgl
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    app.kubernetes.io/name: {{ template "clair.fullname" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 spec:
   podSelector:
     matchLabels:
-      app: tgl
-      release: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ template "clair.fullname" . }}
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
   policyTypes:
     - Ingress
   ingress:
     - from:
       - namespaceSelector:
           matchLabels:
-            name: jenkins
+            app.kubernetes.io/name: {{ .Values.network_policy.allowed_namespace }}
+      # backward compatibility
+      - namespaceSelector:
+          matchLabels:
+            name: {{ .Values.network_policy.allowed_namespace }}
       ports:
-      - port: {{ .Values.gateway.server.port }}
+      - port: {{ .Values.service.externalApiPort }}
         protocol: TCP
+        
