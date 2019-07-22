@@ -1,0 +1,56 @@
+version: 2.1
+
+executors:
+  k8s_tools:
+    docker:
+      - image: "jobteaser/k8s-tools:latest"
+
+jobs:
+  validate:
+    executor: "k8s_tools"
+    steps:
+      - checkout
+      - run:
+          name: "Validate charts"
+          command: |
+            ./utils/lint
+
+  publish:
+    executor: "k8s_tools"
+    steps:
+      - checkout
+      - run:
+          name: "Clone the repository for the gh-pages branch"
+          command: |
+            mkdir -p charts
+            cd charts
+            git clone $CIRCLE_REPOSITORY_URL
+            git checkout -B gh-pages
+            git reset --hard origin/gh-pages
+            git config user.email dev@jobteaser.com
+            git config user.name "JobTeaser"
+      - run:
+          name: "Initialize Helm"
+          command: |
+            helm init --client-only
+      - run:
+          name: "Package charts"
+          command: |
+            ./utils/package-charts
+      - run:
+          name: "Commit changes"
+          command: |
+            cd charts
+            git add .
+            git commit -m "updating charts"
+            git push origin HEAD:gh-pages
+
+workflows:
+  main:
+    jobs:
+      - validate
+      - publish:
+          requires: ["validate"]
+          filters:
+            branches:
+              only: ["master"]

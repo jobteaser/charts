@@ -1,20 +1,13 @@
-# charts
+# Charts
 
-### How It Works
+## Introduction
+This repository contains public Helm charts.
 
-I set up GitHub Pages to point to the `docs` folder. From there, I can
-create and publish docs like this:
+## Publishing
+Charts are published on Github Pages. The repository is configured to use the
+`gh-pages` branch.
 
-```
-helm create mychart
-```
+All charts are available at https://jobteaser.github.io/charts.
 
-### Publish
-Publishing is done by a continuous deployment pipeline triggered by a merge on master.
-
-### Install repo into helm
-
-```
-helm repo add jobteaser https://jobteaser.github.io/charts
-```
-
+## CI
+**TODO** RelativeTargetDirectory
