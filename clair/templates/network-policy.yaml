@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  app.kubernetes.io/name: {{ template "clair.fullname" . }}
+  name: {{ template "clair.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
