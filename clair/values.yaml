@@ -102,3 +102,6 @@ postgres:
 
   persistence:
     size: 10Gi
+
+  networkPolicy:
+    enabled: true

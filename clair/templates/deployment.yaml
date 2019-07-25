@@ -17,6 +17,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ template "clair.fullname" . }}
+        {{ template "postgres.fullname" . }}-client: "true"
     spec:
       volumes:
       - name: "{{ .Chart.Name }}-config"
