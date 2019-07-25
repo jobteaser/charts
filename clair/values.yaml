@@ -9,7 +9,7 @@ image:
   tag: v2.0.8
   pullPolicy: Always
 service:
-  type: NodePort
+  type: ClusterIP
   internalApiPort: 6060
   externalApiPort: 6060
   internalHealthPort: 6061
