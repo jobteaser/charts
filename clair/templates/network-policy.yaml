@@ -20,11 +20,11 @@ spec:
     - from:
       - namespaceSelector:
           matchLabels:
-            app.kubernetes.io/name: {{ .Values.network_policy.allowed_namespace }}
+            app.kubernetes.io/name: {{ .Values.networkPolicy.allowedNamespace }}
       # backward compatibility
       - namespaceSelector:
           matchLabels:
-            name: {{ .Values.network_policy.allowed_namespace }}
+            name: {{ .Values.networkPolicy.allowedNamespace }}
       ports:
       - port: {{ .Values.service.externalApiPort }}
         protocol: TCP

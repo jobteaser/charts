@@ -34,8 +34,8 @@ resources:
   requests:
     cpu: 100m
     memory: 500Mi
-network_policy:
-  allowed_namespace: ""
+networkPolicy:
+  allowedNamespace: ""
 config:
   # Clair docs: https://github.com/coreos/clair/tree/master/Documentation
   # postgresURI: "postgres://user:password@host:5432/postgres?sslmode=disable"
