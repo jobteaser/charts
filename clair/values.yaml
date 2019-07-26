@@ -1,0 +1,107 @@
+# Default values for clair.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+logLevel: info
+insecureTls: false
+image:
+  repository: quay.io/coreos/clair
+  tag: v2.0.8
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  internalApiPort: 6060
+  externalApiPort: 6060
+  internalHealthPort: 6061
+  externalHealthPort: 6061
+ingress:
+  enabled: false
+  # Used to create Ingress record (should used with service.type: ClusterIP).
+  hosts:
+    - chart-example.local
+  annotations:
+    kubernetes.io/ingress.class: ingress
+    certmanager.k8s.io/issuer: "letsencrypt-prod"
+  tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+resources:
+  limits:
+    cpu: 200m
+    memory: 1500Mi
+  requests:
+    cpu: 100m
+    memory: 500Mi
+networkPolicy:
+  allowedNamespace: ""
+config:
+  # Clair docs: https://github.com/coreos/clair/tree/master/Documentation
+  # postgresURI: "postgres://user:password@host:5432/postgres?sslmode=disable"
+
+  # 32-bit URL-safe base64 key used to encrypt pagination tokens.
+  # If one is not provided, it will be generated.
+  # Multiple clair instances in the same cluster need the same value.
+  paginationKey: ""
+  # Frequency the database will be updated with vulnerabilities from the default data sources
+  # The value 0 disables the updater entirely.
+  updateInterval: 2h
+  # Optional endpoint that will receive notifications via POST requests.
+  notificationWebhookEndpoint: ""
+  # Clair will download CVE information for these operating systems.
+  enabledUpdaters:
+  - debian
+  - ubuntu
+  - rhel
+  - oracle
+  - alpine
+  - suse
+  # Feature - anything that when present in a filesystem could be an indication of a vulnerability
+  #   (e.g. the presence of a file or an installed software package)
+  # Feature Namespace (featurens) - a context around features and vulnerabilities (e.g. an operating
+  #   system or a programming language). Namespace is the contextual information around features.
+  enabledNamespaceDetectors:
+  - os-release
+  - lsb-release
+  - apt-sources
+  - alpine-release
+  - redhat-release
+  enabledFeatureListers:
+  - apk
+  - dpkg
+  - rpm
+nodeSelector: {}
+tolerations: []
+
+# Configuration values for the postgres dependency.
+# ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+postgres:
+# The dependant Postgres chart can be disabled, to connect to
+# an existing database by defining config.postgresURI
+  enabled: true
+
+  imageTag: postgres:9.6
+
+  resources:
+    requests:
+      memory: 1024Mi
+      cpu: 1000m
+
+  # Use secret store to set postgres user password
+  # secretName: # default to {{ .Release.Name }}-secret
+  secret:
+    enabled: false
+
+  # These values are hardcoded until Helm supports secrets.
+  # For more info see: https://github.com/kubernetes/helm/issues/2196
+  # TODO pass the database credetials as secrets
+  postgresUser: clair
+  postgresPassword: clair
+  postgresDatabase: clair
+
+  persistence:
+    size: 10Gi
+
+  networkPolicy:
+    enabled: true

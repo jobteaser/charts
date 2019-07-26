@@ -18,3 +18,5 @@ Publishing is done by a continuous deployment pipeline triggered by a merge on m
 helm repo add jobteaser https://jobteaser.github.io/charts
 ```
 
+### Dependencies
+If your chart has some dependencies defined in `requirements.yaml`, before installing the chart, do `helm dep up` to install the dependencies. It will create a charts/ directory with .tgz files that correspond to the dependencies.
