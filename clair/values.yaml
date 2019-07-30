@@ -29,13 +29,13 @@ ingress:
     #     - chart-example.local
 resources:
   limits:
-    cpu: 200m
+    cpu: 500m
     memory: 1500Mi
   requests:
     cpu: 100m
     memory: 500Mi
 networkPolicy:
-  allowedNamespace: ""
+  allowedNamespace: jenkins
 config:
   # Clair docs: https://github.com/coreos/clair/tree/master/Documentation
   # postgresURI: "postgres://user:password@host:5432/postgres?sslmode=disable"
@@ -88,20 +88,9 @@ postgres:
       memory: 1024Mi
       cpu: 1000m
 
-  # Use secret store to set postgres user password
-  # secretName: # default to {{ .Release.Name }}-secret
-  secret:
-    enabled: false
-
-  # These values are hardcoded until Helm supports secrets.
-  # For more info see: https://github.com/kubernetes/helm/issues/2196
-  # TODO pass the database credetials as secrets
-  postgresUser: clair
-  postgresPassword: clair
   postgresDatabase: clair
 
   persistence:
-    size: 10Gi
-
+    size: 100Gi
   networkPolicy:
     enabled: true
