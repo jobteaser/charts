@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "6.2.3-snapshot"
 description: Filebeat log collector
 name: kubernetes-filebeat
-version: 0.4.1
+version: 0.4.2

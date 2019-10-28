@@ -21,11 +21,14 @@ spec:
         profile: node
       annotations:
         checksum/config: {{ include "conf_node" . | sha256sum }}
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       serviceAccountName: filebeat
       terminationGracePeriodSeconds: 30
       nodeSelector:
         'kubernetes.io/role': node
+      tolerations:
+        - operator: "Exists"
       containers:
       - name: filebeat
         image: "{{ .Values.app.node_image }}"
