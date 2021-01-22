@@ -324,7 +324,7 @@ data:
 
     cd /usr/local/src/security_monkey
 
-    celery -A security_monkey.task_scheduler.beat.CELERY beat -l debug
+    celery -A security_monkey.task_scheduler.beat.CELERY beat -l info
   worker-start.sh: |-
     #!/bin/bash
 
