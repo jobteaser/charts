@@ -15,6 +15,10 @@ spec:
       targetPort: 6379
       protocol: TCP
       name: redis
+    - port: 26379
+      targetPort: 26379
+      protocol: TCP
+      name: sentinel
   clusterIP: None
   selector:
     app: {{ template "redis.fullname" . }}
