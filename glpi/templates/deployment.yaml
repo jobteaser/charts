@@ -1,0 +1,73 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ template "glpi.fullname" . }}
+  labels:
+    app: glpi
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: glpi
+  template:
+    metadata:
+      labels:
+        app: glpi
+        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+        release: {{ .Release.Name | quote }}
+        heritage: {{ .Release.Service | quote }}
+        {{- if .Values.template.labels }}
+{{ toYaml .Values.template.labels | indent 8 }}
+        {{- end }}
+    spec:
+      containers:
+      - name: glpi
+        image: {{ .Values.image }}
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "/opt/glpi/glpi-init.sh"]
+        volumeMounts:
+        - name: init
+          mountPath: "/opt/glpi/"
+        - name: data
+          mountPath: "/var/www/glpi/files"
+        env:
+        - name: GLPI_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretDbRefName }}
+              key: username
+        - name: GLPI_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secretDbRefName }}
+              key: password
+        - name: GLPI_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "glpi.fullname" . }}-conf
+              key: glpi_db_host
+        - name: GLPI_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "glpi.fullname" . }}-conf
+              key: glpi_db_name
+        - name: GLPI_DB_LANG
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "glpi.fullname" . }}-conf
+              key: glpi_lang
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: init
+        configMap:
+          name: {{ template "glpi.fullname" . }}-init
+          defaultMode: 0755
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ template "glpi.fullname" . }}-data

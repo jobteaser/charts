@@ -1,0 +1,9 @@
+#########################################
+###        GLPI IS INSTALLED!         ###
+#########################################
+{{- if .Values.ingress.enabled }}
+You can access GLPI by going to this URL:
+{{- range .Values.ingress.hosts }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ . }}{{ index $.Values.ingress.hosts 0 }}
+{{- end }}
+{{- end }}

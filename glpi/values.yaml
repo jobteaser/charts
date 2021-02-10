@@ -1,0 +1,55 @@
+# Default values for glpi.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# We are looking for root_password, username and password (at the DB level) in this secret.
+secretDbRefName: secret
+
+image: jobteaser/glpi
+replicaCount: 1
+
+service:
+  name: glpi
+  type: ClusterIP
+  protocol: TCP
+  externalPort: 80
+  internalPort: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  path: /
+  hosts: []
+  tls:
+    - secretName: secret-tls
+      hosts: []
+
+config:
+  dbHost: "mysql"
+  dbName: "glpi"
+  defaultLang: "en_EN"
+
+persistence:
+  enabled: true
+  storageClass: default
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+template:
+  labels: {}
+    # To define specific labels, uncomment the following lines, adjust them as
+    # necessary, and remove the curly braces after 'labels:'.
+    # tier: db
+    # component: glpi
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi

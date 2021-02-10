@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "glpi.fullname" . }}-conf
+data:
+  glpi_db_host: {{ .Values.config.dbHost }}
+  glpi_db_name: {{ .Values.config.dbName }}
+  glpi_lang: {{ .Values.config.defaultLang }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "glpi.fullname" . }}-init
+data:
+  glpi-init.sh: |-
+    function setup_dep {
+      echo "> SETUP DEPEDENCIES"
+      local packages="mysql-client"
+      apk add ${packages}
+    }
+    
+    function check_db_exist {
+      local nb_lines=0
+      [ $(mysql --host=${GLPI_DB_HOST} --password=${GLPI_DB_PASSWORD} -u ${GLPI_DB_USER} -e "use ${GLPI_DB_NAME}; show tables;" | wc -l) -gt ${nb_lines} ]
+    }
+    
+    function setup_layout {
+      echo "> SETUP THE LAYOUT"
+      local work_dir="/var/www/glpi/"
+      local dir="_cache _cron _dumps _graphs _lock _log _pictures _plugins _rss _sessions _tmp _uploads"                                                                  
+      for i in ${dir}; do
+        mkdir -p ${work_dir}/files/$i
+      done
+      chown -R nginx:nginx ${work_dir}/files
+      rm install/install.php 2>/dev/null
+    }
+    
+    function init_db {
+      echo "> INITIALIZE DB"
+      local work_dir="/var/www/glpi"
+      cd ${work_dir} && echo "~ CURRENT DIRECTORY: $(pwd)"
+      bin/console db:install --db-host ${GLPI_DB_HOST} --db-name ${GLPI_DB_NAME} --db-user ${GLPI_DB_USER} --db-password ${GLPI_DB_PASSWORD} --default-language ${GLPI_DB_LANG} --no-interaction
+      rm -rf ${work_dir}/files/*
+    }
+    
+    function gen_config {
+      echo "> CONFIGURE"
+      local work_dir="/var/www/glpi"
+      local config="<?php
+    class DB extends DBmysql {
+       public \$dbhost     = '${GLPI_DB_HOST}';
+       public \$dbuser     = '${GLPI_DB_USER}';
+       public \$dbpassword = '${GLPI_DB_PASSWORD}';
+       public \$dbdefault  = '${GLPI_DB_NAME}';
+    }"
+      printf "${config}" > ${work_dir}/config/config_db.php
+    }
+    
+    function main {
+      echo "# START"
+      setup_dep
+      if check_db_exist; then
+        echo "# NO INIT"
+        echo "The DB is already installed ..."
+        gen_config
+      else
+        echo "# INIT"
+        echo "The DB is not installed yet ..."
+        init_db
+      fi
+      setup_layout
+      echo "# END"
+    }
+    
+    main
