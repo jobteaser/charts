@@ -324,7 +324,7 @@ data:
 
     cd /usr/local/src/security_monkey
 
-    celery -A security_monkey.task_scheduler.beat.CELERY beat -l debug
+    celery -A security_monkey.task_scheduler.beat.CELERY beat -l ERROR
   worker-start.sh: |-
     #!/bin/bash
 
@@ -733,6 +733,9 @@ data:
         os.getenv('SECURITY_MONKEY_REDIS_HOST', 'redis'),
         os.getenv('SECURITY_MONKEY_REDIS_DB', '0')
     )
+
+    # Loglevel
+    loglevel = "ERROR"
 
     # List of modules to import when the Celery worker starts.
     imports = ('security_monkey.task_scheduler.tasks',)
