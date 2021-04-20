@@ -8,7 +8,7 @@ entries:
     digest: aa0377e1fe2336630a426d5f7a4fc7873c9c25e4ad762a16d1f983bb7391a5cc
     name: ci-connector
     urls:
-    - https://jobteaser.github.com/charts/ci-connector-0.1.0.tgz
+    - https://jobteaser.github.io/charts/ci-connector-0.1.0.tgz
     version: 0.1.0
   clair:
   - appVersion: 2.0.8
@@ -25,7 +25,7 @@ entries:
     sources:
     - https://github.com/coreos/clair
     urls:
-    - https://jobteaser.github.com/charts/clair-0.1.1.tgz
+    - https://jobteaser.github.io/charts/clair-0.1.1.tgz
     version: 0.1.1
   - appVersion: 2.0.8
     created: 2019-10-28T11:34:47.679481113Z
@@ -41,7 +41,7 @@ entries:
     sources:
     - https://github.com/coreos/clair
     urls:
-    - https://jobteaser.github.com/charts/clair-0.1.0.tgz
+    - https://jobteaser.github.io/charts/clair-0.1.0.tgz
     version: 0.1.0
   csp-handler:
   - apiVersion: v1
@@ -51,7 +51,7 @@ entries:
     digest: ae6b470fd09a57637a5e02a1f16ede01c084474c27357ecb96592d9dcd633121
     name: csp-handler
     urls:
-    - https://jobteaser.github.com/charts/csp-handler-0.2.1.tgz
+    - https://jobteaser.github.io/charts/csp-handler-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
     appVersion: "1.0"
@@ -60,7 +60,7 @@ entries:
     digest: 0699733cb0ba380ca035c67935cab7eefa9a6c4779eae0f314e08e260802bda3
     name: csp-handler
     urls:
-    - https://jobteaser.github.com/charts/csp-handler-0.2.0.tgz
+    - https://jobteaser.github.io/charts/csp-handler-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
@@ -69,7 +69,7 @@ entries:
     digest: 984e15b00a645ffae713a922151e3c1b05f4ade2cb6e12b0ceb33887682174d9
     name: csp-handler
     urls:
-    - https://jobteaser.github.com/charts/csp-handler-0.1.0.tgz
+    - https://jobteaser.github.io/charts/csp-handler-0.1.0.tgz
     version: 0.1.0
   datadog:
   - apiVersion: v1
@@ -79,7 +79,7 @@ entries:
     digest: 5abbb3f6b5ccbd159376d9dd6b9239342c1f1e486f47d199c259b2d96a430857
     name: datadog
     urls:
-    - https://jobteaser.github.com/charts/datadog-0.2.0.tgz
+    - https://jobteaser.github.io/charts/datadog-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     appVersion: latest
@@ -88,7 +88,7 @@ entries:
     digest: ff54dceff3a9827e9c691b719804d5118e7a3ad67a7cdfbcd56d39d27ab2c9ac
     name: datadog
     urls:
-    - https://jobteaser.github.com/charts/datadog-0.1.1.tgz
+    - https://jobteaser.github.io/charts/datadog-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
@@ -97,7 +97,7 @@ entries:
     digest: 1a8bb890cc90ee4520d667f49c3a4d774141f9f4295b78bad866ad2797451f6f
     name: datadog
     urls:
-    - https://jobteaser.github.com/charts/datadog-0.1.0.tgz
+    - https://jobteaser.github.io/charts/datadog-0.1.0.tgz
     version: 0.1.0
   elasticsearch:
   - apiVersion: v1
@@ -106,7 +106,7 @@ entries:
     digest: 9c098ff341bb1692f2350f263fd817d636891d6a9480e7ac84b830fc22056e6c
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.1.2.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.1.2.tgz
     version: 2.1.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.687237237Z
@@ -114,7 +114,7 @@ entries:
     digest: 7aa56ddfb92b64b2ad06537c323f1aa3939debb0bbb579da7a0e2c57ada5d5db
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.1.1.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.1.1.tgz
     version: 2.1.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.686915196Z
@@ -122,7 +122,7 @@ entries:
     digest: 67e381f224ce31278f56ed8f95bf30052ce912cd63ad71c951e61d551561582f
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.1.0.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.686646569Z
@@ -130,7 +130,7 @@ entries:
     digest: 1fc0d3b09d7ed171eb9ce73fcc3d00813b461af7024f525c064a05768263d78e
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.0.3.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.0.3.tgz
     version: 2.0.3
   - apiVersion: v1
     created: 2019-10-28T11:34:47.686392047Z
@@ -138,7 +138,7 @@ entries:
     digest: c1c7704c370e9869dffe16f7f9efcb8b08216612a2964fe3ef24a86f975c23bc
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.0.2.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.0.2.tgz
     version: 2.0.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.686134375Z
@@ -146,7 +146,7 @@ entries:
     digest: adaa91a475c3f4a86bb7d03b6721a0047b909348607c773c8457d518f10a6f29
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.0.1.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.685827352Z
@@ -154,7 +154,7 @@ entries:
     digest: 3ef84d486e2b105c38c5c2b43d5564bb7aaf056769a5b35ad3199d8773a5e87e
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-2.0.0.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-2.0.0.tgz
     version: 2.0.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.68522227Z
@@ -162,7 +162,7 @@ entries:
     digest: 5c634f66522d0a173ed2657a11403643baf4c1cde90dbb0f8862e8d93e32962e
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-1.0.4.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-1.0.4.tgz
     version: 1.0.4
   - apiVersion: v1
     created: 2019-10-28T11:34:47.684353039Z
@@ -170,7 +170,7 @@ entries:
     digest: c67eeed6ff28d430f448c4ba95700ef9f22c3b4d6dc007bf8a338cc2944164f7
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-1.0.3.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-1.0.3.tgz
     version: 1.0.3
   - apiVersion: v1
     created: 2019-10-28T11:34:47.684003376Z
@@ -178,7 +178,7 @@ entries:
     digest: 82eac43b4ed63e4d7193412595d51c359e3e51f0885572c6519fc67b34656f6a
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-1.0.2.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.683658743Z
@@ -186,7 +186,7 @@ entries:
     digest: 7f80ac94ae4fcb6178a76b73e7dd10d0d2cd2cb1f8cbe286943a5f77e74aaf22
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-1.0.1.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.683353502Z
@@ -194,7 +194,7 @@ entries:
     digest: 471bb4694963d145121896447a209a5e5f612c71ffe3a4d1c89614ac3ee6009b
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-0.3.0.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.683068559Z
@@ -202,7 +202,7 @@ entries:
     digest: 3d46ce14ab3cf2ce0dc19972bec41b8295b7f6d6e87b3e93d7a647ef0f6caca9
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-0.2.2.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.682741589Z
@@ -210,7 +210,7 @@ entries:
     digest: 22a9e6cfa7073b03eb9927ed5abcd471e69f2701024deba67ef7f9f9b407c779
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-0.2.1.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.682498857Z
@@ -218,7 +218,7 @@ entries:
     digest: 5967e79daee8bc3ea4af95ed726ebe3557f76cb01c5bccf79cc6fe82ec2e2ddf
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-0.2.0.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.682277434Z
@@ -226,7 +226,7 @@ entries:
     digest: 277a9ad3b203787bcc9e4cb710a343fc9f9f8ac59d1c5d38823a2ac6b8c0a2fc
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-0.1.1.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.682048254Z
@@ -234,7 +234,7 @@ entries:
     digest: 2fa7fb1be32e88b5a1e3dde07efb86a6d9ad7b7c7eaa5bdb7c705d1bdec008db
     name: elasticsearch
     urls:
-    - https://jobteaser.github.com/charts/elasticsearch-0.1.0.tgz
+    - https://jobteaser.github.io/charts/elasticsearch-0.1.0.tgz
     version: 0.1.0
   jenkins:
   - appVersion: 2.121.1
@@ -255,7 +255,7 @@ entries:
     - https://github.com/jenkinsci/jenkins
     - https://github.com/jenkinsci/docker-jnlp-slave
     urls:
-    - https://jobteaser.github.com/charts/jenkins-0.16.6.tgz
+    - https://jobteaser.github.io/charts/jenkins-0.16.6.tgz
     version: 0.16.6
   jtpostgres:
   - apiVersion: v1
@@ -271,7 +271,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/jtpostgres-0.1.0.tgz
+    - https://jobteaser.github.io/charts/jtpostgres-0.1.0.tgz
     version: 0.1.0
   kubectl-oidc-helper:
   - apiVersion: v1
@@ -280,7 +280,7 @@ entries:
     digest: eda7eb77277f10d7b7d1ed364652ace768147fddf130d471d05cf6bf40c92db2
     name: kubectl-oidc-helper
     urls:
-    - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.2.2.tgz
+    - https://jobteaser.github.io/charts/kubectl-oidc-helper-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.689437683Z
@@ -288,7 +288,7 @@ entries:
     digest: dce54ef3063bbaeb33707a10e4a18d52547b84154b3f69746cd4407a3a5cff61
     name: kubectl-oidc-helper
     urls:
-    - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.2.1.tgz
+    - https://jobteaser.github.io/charts/kubectl-oidc-helper-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.689193794Z
@@ -296,7 +296,7 @@ entries:
     digest: 5befa2b8d584836286e69be39fcbc19477daf994641a8fcef32135c94ec008b7
     name: kubectl-oidc-helper
     urls:
-    - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.2.0.tgz
+    - https://jobteaser.github.io/charts/kubectl-oidc-helper-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.688957793Z
@@ -304,7 +304,7 @@ entries:
     digest: 41a6e0fb9bd2180006d5db955dc11fe687d2a92bf9dc7d58796ca4b54fe3550b
     name: kubectl-oidc-helper
     urls:
-    - https://jobteaser.github.com/charts/kubectl-oidc-helper-0.1.0.tgz
+    - https://jobteaser.github.io/charts/kubectl-oidc-helper-0.1.0.tgz
     version: 0.1.0
   kubernetes-filebeat:
   - apiVersion: v1
@@ -314,7 +314,7 @@ entries:
     digest: f70868b1ac468e64fda3d1fd4d4fbc96198aaae7eea6d87a15ceaf3092d6ae74
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.4.2.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v1
     appVersion: 6.2.3-snapshot
@@ -323,7 +323,7 @@ entries:
     digest: 4340ee786672c7a6bc2487026d378dd4075b832399d3d3d79086773f8995bcb9
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.4.1.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v1
     appVersion: 6.2.1
@@ -332,7 +332,7 @@ entries:
     digest: 909f6394b2f0d2bdae412665a14036c6150ca8cc5645400d5b5bc84f93f0f13f
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.4.0.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v1
     appVersion: 6.7.1
@@ -341,7 +341,7 @@ entries:
     digest: 758ac2959cd72255b23ed8a0130816b0a96de9813fb0b3bbdb484ba06961e2e1
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.3.1.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v1
     appVersion: 6.2.1
@@ -350,7 +350,7 @@ entries:
     digest: f17cc775e5cf4e635ebf88599e0f0d1570fdf4acbf0bdb6f0faaddea975dddfc
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.2.1.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
     appVersion: 6.2.1
@@ -359,7 +359,7 @@ entries:
     digest: 4b0588e9213850eb2fe45eabdd6353b7bd0405dc0e462ac4f9dc782b4909a073
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.2.0.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
@@ -368,7 +368,7 @@ entries:
     digest: 5c1011f4cce7bedd1bd6689650ad242b87b187a210c1db16ada4a2160ff045b0
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.1.1.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
@@ -377,7 +377,7 @@ entries:
     digest: d1001519d4ff9c922472e11e079b157379d0561f553cdd3c571e25f2c2db1aff
     name: kubernetes-filebeat
     urls:
-    - https://jobteaser.github.com/charts/kubernetes-filebeat-0.1.0.tgz
+    - https://jobteaser.github.io/charts/kubernetes-filebeat-0.1.0.tgz
     version: 0.1.0
   mysql:
   - apiVersion: v1
@@ -386,7 +386,7 @@ entries:
     digest: b656b7cae8e038c7ee149808d6a451c09fb4e2cd0f07473616b81d78821308db
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-1.2.0.tgz
+    - https://jobteaser.github.io/charts/mysql-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.766248742Z
@@ -394,7 +394,7 @@ entries:
     digest: 946cd58dabff76d898771609e5fcdad5586d661cd6cf9e6ce54176b87a323eb3
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-1.0.3.tgz
+    - https://jobteaser.github.io/charts/mysql-1.0.3.tgz
     version: 1.0.3
   - apiVersion: v1
     created: 2019-10-28T11:34:47.76590794Z
@@ -402,7 +402,7 @@ entries:
     digest: f7502ebc46d835bc291bc99f8600e319f6bcec3a010204da939b9f2a758b18b5
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-1.0.2.tgz
+    - https://jobteaser.github.io/charts/mysql-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.765569503Z
@@ -410,7 +410,7 @@ entries:
     digest: a94385aab3af4a7a904265702a9ae4d278c32cf81ca0da72562d926074c39c21
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-1.0.1.tgz
+    - https://jobteaser.github.io/charts/mysql-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.765244962Z
@@ -418,7 +418,7 @@ entries:
     digest: 99cc7a80d0cc674361470f2dfd67db2005afee82a09d129e32e51da677a9325e
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-1.0.0.tgz
+    - https://jobteaser.github.io/charts/mysql-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.764924296Z
@@ -426,7 +426,7 @@ entries:
     digest: c1c4b393f613ac5b755ce2bcf8656b74c327275db1fca7aae603bf89a5727c23
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-0.2.1.tgz
+    - https://jobteaser.github.io/charts/mysql-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.764691385Z
@@ -434,7 +434,7 @@ entries:
     digest: e918062b2f21a6ff200bbbfb18224af0a87968390fa871c6cb816c021603ffde
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-0.2.0.tgz
+    - https://jobteaser.github.io/charts/mysql-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.764446058Z
@@ -442,7 +442,7 @@ entries:
     digest: 73e8674411bc8aa779ebb609329a3e22ec5767b1644ccdab276b323015cc5bea
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-0.1.1.tgz
+    - https://jobteaser.github.io/charts/mysql-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.764244337Z
@@ -450,7 +450,7 @@ entries:
     digest: e6557eb05e5c351181887a8e5683f0a706df2c893ddf3229f5619493db698556
     name: mysql
     urls:
-    - https://jobteaser.github.com/charts/mysql-0.1.0.tgz
+    - https://jobteaser.github.io/charts/mysql-0.1.0.tgz
     version: 0.1.0
   oidc-proxy:
   - apiVersion: v1
@@ -459,7 +459,7 @@ entries:
     digest: 993697d90487767a0523902a116437f9e5064cb91b024475f24286162be67409
     name: oidc-proxy
     urls:
-    - https://jobteaser.github.com/charts/oidc-proxy-0.1.0.tgz
+    - https://jobteaser.github.io/charts/oidc-proxy-0.1.0.tgz
     version: 0.1.0
   postgres:
   - apiVersion: v1
@@ -475,7 +475,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.5.2.tgz
+    - https://jobteaser.github.io/charts/postgres-0.5.2.tgz
     version: 0.5.2
   - apiVersion: v1
     created: 2019-10-28T11:34:47.775659088Z
@@ -490,7 +490,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.5.1.tgz
+    - https://jobteaser.github.io/charts/postgres-0.5.1.tgz
     version: 0.5.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.775243052Z
@@ -505,7 +505,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.5.0.tgz
+    - https://jobteaser.github.io/charts/postgres-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.774763348Z
@@ -520,7 +520,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.4.0.tgz
+    - https://jobteaser.github.io/charts/postgres-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.774292581Z
@@ -535,7 +535,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.3.0.tgz
+    - https://jobteaser.github.io/charts/postgres-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.773535439Z
@@ -550,7 +550,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.2.0.tgz
+    - https://jobteaser.github.io/charts/postgres-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.773075644Z
@@ -565,7 +565,7 @@ entries:
     - https://github.com/jobteaser/charts
     - https://github.com/docker-library/postgres
     urls:
-    - https://jobteaser.github.com/charts/postgres-0.1.0.tgz
+    - https://jobteaser.github.io/charts/postgres-0.1.0.tgz
     version: 0.1.0
   redis:
   - apiVersion: v1
@@ -575,7 +575,7 @@ entries:
     digest: 68f89bc18734cedf1c4e8adc05c342fef6c36e76dd06b63c54e6c3bf07954f9a
     name: redis
     urls:
-    - https://jobteaser.github.com/charts/redis-1.1.0.tgz
+    - https://jobteaser.github.io/charts/redis-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.777129032Z
@@ -584,7 +584,7 @@ entries:
     digest: c95775852665d15dc6420d729b4bc31094f8aefa003aabd5256ac34adcc598aa
     name: redis
     urls:
-    - https://jobteaser.github.com/charts/redis-1.0.0.tgz
+    - https://jobteaser.github.io/charts/redis-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.776767102Z
@@ -592,7 +592,7 @@ entries:
     digest: 9669ead620638b07eec60d3b59716a18fb7f3dbd55b4f9ca8436ff00e35c9d17
     name: redis
     urls:
-    - https://jobteaser.github.com/charts/redis-0.2.1.tgz
+    - https://jobteaser.github.io/charts/redis-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.776560211Z
@@ -600,7 +600,7 @@ entries:
     digest: 23badec44cb765fc00d0658d797369387fbc16055aa8d8ada253890ebb7f59ca
     name: redis
     urls:
-    - https://jobteaser.github.com/charts/redis-0.2.0.tgz
+    - https://jobteaser.github.io/charts/redis-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     created: 2019-10-28T11:34:47.776371046Z
@@ -608,7 +608,7 @@ entries:
     digest: 511ce6a5c2f3f92561356cad2398c8e6c6b520586c9610a909a48ccea6b3240a
     name: redis
     urls:
-    - https://jobteaser.github.com/charts/redis-0.1.1.tgz
+    - https://jobteaser.github.io/charts/redis-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     created: 2019-10-28T11:34:47.77617922Z
@@ -616,7 +616,7 @@ entries:
     digest: aeab5b974c5d030308ba720eae58f8003e1d341dc31de3f8435450a3f2e25d16
     name: redis
     urls:
-    - https://jobteaser.github.com/charts/redis-0.1.0.tgz
+    - https://jobteaser.github.io/charts/redis-0.1.0.tgz
     version: 0.1.0
   security-monkey:
   - apiVersion: v1
@@ -626,7 +626,7 @@ entries:
     digest: 82190ad4548ebd250348643566c0781aeb62c337713c5a4cad549cfa781d3252
     name: security-monkey
     urls:
-    - https://jobteaser.github.com/charts/security-monkey-0.1.2.tgz
+    - https://jobteaser.github.io/charts/security-monkey-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v1
     appVersion: "1.0"
@@ -635,6 +635,6 @@ entries:
     digest: 26caf2f1af57b5fd6ec077770fc83048cd4f18228936088786df544f7715c2c0
     name: security-monkey
     urls:
-    - https://jobteaser.github.com/charts/security-monkey-0.1.1.tgz
+    - https://jobteaser.github.io/charts/security-monkey-0.1.1.tgz
     version: 0.1.1
 generated: 2019-10-28T11:34:47.678393661Z
