@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "security-monkey.fullname" . }}-api
@@ -122,7 +122,7 @@ spec:
 {{ toYaml . | indent 8 }}
     {{- end }}
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "security-monkey.fullname" . }}-scheduler
@@ -230,7 +230,7 @@ spec:
 {{ toYaml . | indent 8 }}
     {{- end }}
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "security-monkey.fullname" . }}-worker
@@ -267,6 +267,10 @@ spec:
       - name: github-creds
         secret:
           secretName: github
+      - name: app-env-config
+        configMap:
+          name: app-env-config
+          defaultMode: 0755
       containers:
         - name: {{ .Chart.Name }}-worker
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -287,6 +291,9 @@ spec:
           - name: github-creds
             mountPath: /usr/local/src/security_monkey/github.json
             subPath: github.json
+            readOnly: true
+          - name: app-env-config
+            mountPath: /usr/local/src/security_monkey/env-config/
             readOnly: true
           envFrom:
           - configMapRef:
@@ -336,7 +343,7 @@ spec:
 {{ toYaml . | indent 8 }}
     {{- end }}
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "security-monkey.fullname" . }}-nginx
